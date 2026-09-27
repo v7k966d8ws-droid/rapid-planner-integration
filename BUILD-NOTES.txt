@@ -1,21 +1,6 @@
-Integration Build 3.7
-- Removed the duplicate Rapid Planner Products & Injectors header control.
-- Kept the main app Setup tab as the single setup location.
-- Rapid Planner now reads product names/application method/units and injector names/flow rates from the main app Setup data.
-- Planner-specific nightly rates, prepared volumes, preflow and rinse values remain available in Injection Programming.
+Rapid Planner Integration — Build 3.7 (redone from working Build 3.6)
 
-Rapid Planner Integration — Build 3.6
-
-- Removed the full-width Setup bar from the normal Rapid Planner layout.
-- Added a compact Products & Injectors control to the top-right app header beside the build number.
-- The control opens/closes the existing product and injector setup without changing calculation or save logic.
-- Build shifts now moves up into the space previously occupied by the Setup bar.
-
-Rapid Planner Integration — Build 3.5
-27 September 2026
-
-UI-only change:
-- Tonight's Program job cards are substantially more compact on iPad/laptop.
-- Reduced job-card padding, header spacing, injection table row height, typography and action-button size.
-- Water-only jobs remain especially compact because they have no injection table.
-- No changes to Rapid Planner calculations, shift logic, save integration, sequencing, history logic or injector calculations.
+- Based directly on working Build 3.6; planner rendering and calculations are unchanged.
+- Keeps both Setup and Products & Injectors controls.
+- Moves Products & Injectors into the main navigation beside Setup so the controls no longer overlap.
+- Keeps Build 3.7 badge at the far top-right.

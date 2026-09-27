@@ -1238,3 +1238,17 @@
 @media(min-width:760px){.hero{padding-right:285px!important}}
 @media(max-width:759px){.headerTools{right:8px;top:7px;gap:5px}.productsInjectorsBtn{padding:6px 8px;font-size:11px}.headerTools .headerBuildBadge{padding:6px 7px;font-size:11px}.hero{padding-right:250px!important}}
 @media(max-width:520px){.headerTools .headerBuildBadge{display:none}.hero{padding-right:165px!important}.productsInjectorsBtn{font-size:10px}}
+
+
+/* Integration Build 3.7 — preserve Build 3.6 planner; fit both Setup controls cleanly. */
+@media (min-width:901px){
+  .tabs{grid-template-columns:repeat(6,minmax(120px,1fr))!important;max-width:950px!important}
+  .tabs .navToolBtn{display:flex;align-items:center;justify-content:center;border:0;border-radius:6px;padding:10px 8px;background:#dfe9e1;color:var(--g);font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap}
+  .tabs .navToolBtn.active{background:var(--g);color:#fff}
+  .hero{padding-right:95px!important}
+  .headerTools{right:10px;top:8px}
+}
+@media (max-width:900px){
+  .tabs .navToolBtn{display:flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:12px 8px;background:#dfe9e1;color:var(--g);font-weight:900;font-size:15px;cursor:pointer}
+  .tabs .navToolBtn.active{background:var(--g);color:#fff}
+}
