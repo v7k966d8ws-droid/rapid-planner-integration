@@ -1,10 +1,9 @@
-Rapid Planner Integration — Build 3.3
-27 Sep 2026
+Rapid Planner Integration — Build 3.4
+27 September 2026
 
-UI-only workflow pass based on Build 3.2:
-- Injection Programming uses three compact injector columns on iPad/laptop.
-- Phone layout remains stacked/responsive.
-- Finish & Save Tonight's Program moved directly under the shift/runtime controls.
-- Night date and first-job start remain beside the save action in compact form.
-- Clear shifts moved beside the shift selector and renamed Clear all.
-- Build 3.2 save integration and Build 3.1 shift/calculation logic preserved.
+UI-only header cleanup based on Build 3.3:
+- Removed the Rapid Planner integration banner.
+- Removed the dark green Quick Runtime Planner banner from the embedded planner.
+- Replaced the oversized top-left DD Produce branding with the compact DD Produce badge style.
+- Moved the build identifier to a small badge at the top right: Build 3.4.
+- Preserved Build 3.3 planner, calculation, injector-column and save behaviour.

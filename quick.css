@@ -112,3 +112,7 @@
 @media(min-width:760px){#injectors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:start}#injectors .inj{border:1px solid #d8e1da;border-radius:10px;padding:9px;background:#fafcfa;min-width:0}#injectors .inj:first-child{border-top:1px solid #d8e1da}#injectors .injHead{align-items:flex-start;min-height:55px}#injectors .injHead strong{font-size:14px;line-height:1.15;display:block}#injectors .injHead>div small{font-size:10px;line-height:1.2}#injectors .toggle{min-height:32px;padding:4px 8px;font-size:12px;flex:0 0 auto}#injectors .inj.active .injBody{display:block;padding-top:5px}#injectors .injBody label{display:grid;grid-template-columns:88px minmax(0,1fr);align-items:center;gap:5px;font-size:11px;margin:4px 0}#injectors .injBody label select,#injectors .injBody label input{min-height:34px;padding:4px 6px;font-size:13px}#injectors .calc{margin-top:6px;padding:6px 7px;font-size:11px;line-height:1.25}#injectors .calc b{font-size:13px}.injectionOrderBox{margin-top:9px}}
 @media(max-width:759px){.shiftTabsRow{display:block}.clearShiftsCompact{margin-top:7px;min-height:38px}.quickSaveMeta{grid-template-columns:1fr 1fr}}
 @media(max-width:430px){.quickSaveMeta{grid-template-columns:1fr}.finishSaveTop{font-size:15px}}
+
+/* Integration Build 3.4 — embedded planner uses the parent app header */
+header{display:none!important}
+main{padding-top:8px}
