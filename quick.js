@@ -74,3 +74,17 @@ function quickInjectorsForShift(si,full){const old=activeShift;activeShift=si;co
 function saveIntegrationProgram(){const KEY='irrigationFertigationPlannerV1',farm=$("farm").value,date=$("saveNightDate").value,time=$("saveStartTime").value||'18:00';let full={};try{full=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){};if(!Array.isArray(full.plans))full.plans=[];if(!full.injectorConfig)full.injectorConfig={};const populated=shifts.map((s,i)=>({s,i})).filter(x=>x.s.outlets.length);if(!populated.length){alert('Build at least one shift before saving.');return}const jobs=[];let cursor={date,time},seq=1;const mk=(s,i)=>{const mins=s.irrigation,area=s.outlets.reduce((n,o)=>n+(Number(FARMS[farm]?.[o])||0),0),finish=addMins(cursor.date,cursor.time,mins),irrigationOnly=!!s.irrigationOnly;const p={id:integrationUid(),nightDate:date,date:cursor.date,startTime:cursor.time,finishDate:finish.date,finishTime:finish.time,hours:mins/60,setRuntime:`${String(Math.floor(mins/60)).padStart(2,'0')}:${String(mins%60).padStart(2,'0')}`,farm,outlets:[...s.outlets],area,irrigationOnly,phaseMode:irrigationOnly?'water':'fertigation',injectors:irrigationOnly?emptyFullInjectors(farm,full):quickInjectorsForShift(i,full),requiredPumps:[],shiftPumps:[],pump:'',notes:irrigationOnly?'Water-only shift':'Rapid Planner fertigation shift',programSequence:seq++,created:new Date().toISOString()};cursor=finish;jobs.push(p)};populated.forEach(({s,i})=>mk(s,i));full.plans.push(...jobs);full.plans.sort((a,b)=>new Date(`${a.date}T${a.startTime}:00`)-new Date(`${b.date}T${b.startTime}:00`));localStorage.setItem(KEY,JSON.stringify(full));$("saveStatus").innerHTML=`✓ Saved <b>${jobs.length} shift${jobs.length===1?'':'s'}</b> to Tonight's Program in sequence.`;try{window.parent.postMessage({type:'rapidPlannerSaved',nightDate:date,jobs:jobs.length},window.location.origin)}catch(e){}}
 function initIntegrationBuild3(){const d=new Date(),z=n=>String(n).padStart(2,'0');$("saveNightDate").value=`${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`;$("finishSave").onclick=saveIntegrationProgram}
 initIntegrationBuild3();
+
+
+/* Integration Build 3.6 — allow parent header to open Products & Injectors. */
+window.addEventListener('message', function(event){
+  if(event.origin!==window.location.origin || !event.data || event.data.type!=='toggleRapidSetup') return;
+  const card=document.querySelector('.setupCard');
+  const panel=document.getElementById('setupPanel');
+  if(!card || !panel) return;
+  const open=!card.classList.contains('externalOpen');
+  card.classList.toggle('externalOpen', open);
+  panel.classList.toggle('open', open);
+  window.parent.postMessage({type:'rapidSetupState',open:open}, window.location.origin);
+  if(open) card.scrollIntoView({behavior:'smooth',block:'start'});
+});

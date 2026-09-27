@@ -1228,3 +1228,13 @@
 #planCards .batchTag{font-size:11px;padding:3px 7px}
 @media(max-width:900px){#planCards .planTop{grid-template-columns:95px minmax(220px,1fr) minmax(120px,.65fr) minmax(105px,.55fr)}}
 @media(max-width:700px){#planCards .planTop{grid-template-columns:90px 1fr}#planCards .planInjectTable{min-width:540px}}
+
+
+/* Integration Build 3.6 — top-right Products & Injectors control */
+.headerTools{position:absolute;right:10px;top:8px;display:flex;align-items:center;gap:8px;z-index:3}
+.headerTools .headerBuildBadge{position:static!important}
+.productsInjectorsBtn{border:1px solid #b8c9bd;border-radius:9px;background:#fff;color:#244b35;padding:7px 11px;font-size:12px;font-weight:850;white-space:nowrap}
+.productsInjectorsBtn.active{background:#244b35;color:#fff}
+@media(min-width:760px){.hero{padding-right:285px!important}}
+@media(max-width:759px){.headerTools{right:8px;top:7px;gap:5px}.productsInjectorsBtn{padding:6px 8px;font-size:11px}.headerTools .headerBuildBadge{padding:6px 7px;font-size:11px}.hero{padding-right:250px!important}}
+@media(max-width:520px){.headerTools .headerBuildBadge{display:none}.hero{padding-right:165px!important}.productsInjectorsBtn{font-size:10px}}

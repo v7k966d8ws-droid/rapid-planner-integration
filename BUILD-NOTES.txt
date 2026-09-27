@@ -1,3 +1,10 @@
+Rapid Planner Integration — Build 3.6
+
+- Removed the full-width Setup bar from the normal Rapid Planner layout.
+- Added a compact Products & Injectors control to the top-right app header beside the build number.
+- The control opens/closes the existing product and injector setup without changing calculation or save logic.
+- Build shifts now moves up into the space previously occupied by the Setup bar.
+
 Rapid Planner Integration — Build 3.5
 27 September 2026
 

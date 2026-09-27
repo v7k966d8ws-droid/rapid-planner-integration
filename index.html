@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#244B35">
 <title>Irrigation & Fertigation Planner</title>
-<link rel="stylesheet" href="styles.css?v=3.5">
+<link rel="stylesheet" href="styles.css?v=3.6">
 
 
 <style id="rapidIntegrationBuild1">
@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="app">
-<section class="hero"><div class="heroBrand"><div class="brandLogoSlot" aria-label="DD Produce branding"><span>DD Produce</span></div><div class="heroCopy"><h1>Irrigation & Fertigation Planner</h1><p>Plan irrigation and fertigation, calculate whole-minute injector runtimes and linked preflows, prepare mixed fertilizer vats, then enter the program into AquaLink.</p></div></div><div class="headerBuildBadge">Build 3.5</div><div class="status"><span id="network" class="pill on">● Online</span><span class="pill local">Plans and records save locally first</span></div></section>
+<section class="hero"><div class="heroBrand"><div class="brandLogoSlot" aria-label="DD Produce branding"><span>DD Produce</span></div><div class="heroCopy"><h1>Irrigation & Fertigation Planner</h1><p>Plan irrigation and fertigation, calculate whole-minute injector runtimes and linked preflows, prepare mixed fertilizer vats, then enter the program into AquaLink.</p></div></div><div class="headerTools"><button type="button" id="productsInjectorsBtn" class="productsInjectorsBtn">Products &amp; Injectors</button><div class="headerBuildBadge">Build 3.6</div></div><div class="status"><span id="network" class="pill on">● Online</span><span class="pill local">Plans and records save locally first</span></div></section>
 <nav class="tabs"><button class="active" data-page="dashboard">Dashboard</button><button data-page="tonight">Tonight's Program</button><button data-page="new">Plan Irrigation</button><button data-page="history">History</button><button data-page="setup">Setup</button></nav>
 
 <section id="dashboard" class="page active"><div class="card"><h2>Irrigation Rotation</h2><div id="stats" class="stats"></div></div><div class="card"><h2>Outlet Status</h2><div class="muted" style="margin-bottom:10px">Only completed irrigations update the rotation. Planned jobs do not change last-irrigated dates.</div><div class="statusFilterBar"><div class="statusFilters" id="statusFilters"><button data-filter="all" class="active">All</button><button data-filter="due">Due</button><button data-filter="overdue">Overdue</button><button data-filter="last">Last Irrigation</button><button data-filter="none">No History</button></div><div class="farmFilter"><label for="statusFarmFilter">Farm</label><select id="statusFarmFilter"><option value="all">All Farms</option></select></div></div><div class="compactWrap"><table class="compactTable"><thead id="statusHead"><tr><th>Farm</th><th>Outlet</th><th>Ha</th><th>Last Irrigated</th><th>Next Due</th><th>Days</th><th>Status</th></tr></thead><tbody id="statusBody"></tbody></table></div></div></section>
@@ -35,7 +35,7 @@
 
 <section id="new" class="page rapidIntegrationPage">
 <div class="rapidIntegrationShell">
-  <iframe class="rapidPlannerFrame" src="quick-planner.html?v=3.5" title="Rapid Planner"></iframe>
+  <iframe class="rapidPlannerFrame" src="quick-planner.html?v=3.6" title="Rapid Planner"></iframe>
 </div>
 <div class="programBanner" id="programBanner">
   <div class="programTop">
@@ -190,6 +190,25 @@ window.addEventListener("message", function(event){
     console.error("Rapid Planner save handoff failed", err);
   }
 });
+</script>
+
+<script>
+/* Integration Build 3.6 — compact Products & Injectors control in the app header. */
+(function(){
+  const btn=document.getElementById('productsInjectorsBtn');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    const frame=document.querySelector('.rapidPlannerFrame');
+    if(frame && frame.contentWindow){
+      frame.contentWindow.postMessage({type:'toggleRapidSetup'}, window.location.origin);
+    }
+  });
+  window.addEventListener('message', function(event){
+    if(event.origin!==window.location.origin || !event.data || event.data.type!=='rapidSetupState') return;
+    btn.classList.toggle('active', !!event.data.open);
+    btn.textContent=event.data.open?'Hide Products & Injectors':'Products & Injectors';
+  });
+})();
 </script>
 </body>
 </html>
