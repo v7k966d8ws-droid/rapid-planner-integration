@@ -1208,3 +1208,23 @@
 @media (max-width:900px){
   .headerBuildBadge{top:10px;right:10px}
 }
+
+/* Build 3.5 — compact Tonight's Program job cards (UI only) */
+#planCards{gap:8px}
+#planCards .planCard{padding:9px 11px;border-radius:11px}
+#planCards .planTop{grid-template-columns:105px minmax(240px,1.35fr) minmax(145px,.72fr) minmax(120px,.58fr);gap:8px;align-items:start}
+#planCards .planTime{font-size:18px;line-height:1.05}
+#planCards .planTop strong{font-size:14px;line-height:1.15}
+#planCards .muted{font-size:12px;line-height:1.25}
+#planCards .planInjectWrap{margin-top:7px;border-radius:9px}
+#planCards .planInjectTable{min-width:590px}
+#planCards .planInjectTable th,#planCards .planInjectTable td{padding:5px 8px;font-size:12px;line-height:1.18}
+#planCards .planInjectTable th{font-size:11px}
+#planCards .planInjectorName{white-space:normal}
+#planCards .planProduct{font-size:12px;font-weight:800;line-height:1.15}
+#planCards .planProductRate,#planCards .vatAllocation{font-size:11px;line-height:1.15}
+#planCards .planActions{gap:5px;margin-top:7px}
+#planCards .planActions .smallbtn{padding:6px 9px;font-size:12px;border-radius:9px}
+#planCards .batchTag{font-size:11px;padding:3px 7px}
+@media(max-width:900px){#planCards .planTop{grid-template-columns:95px minmax(220px,1fr) minmax(120px,.65fr) minmax(105px,.55fr)}}
+@media(max-width:700px){#planCards .planTop{grid-template-columns:90px 1fr}#planCards .planInjectTable{min-width:540px}}

@@ -1,9 +1,8 @@
-Rapid Planner Integration — Build 3.4
+Rapid Planner Integration — Build 3.5
 27 September 2026
 
-UI-only header cleanup based on Build 3.3:
-- Removed the Rapid Planner integration banner.
-- Removed the dark green Quick Runtime Planner banner from the embedded planner.
-- Replaced the oversized top-left DD Produce branding with the compact DD Produce badge style.
-- Moved the build identifier to a small badge at the top right: Build 3.4.
-- Preserved Build 3.3 planner, calculation, injector-column and save behaviour.
+UI-only change:
+- Tonight's Program job cards are substantially more compact on iPad/laptop.
+- Reduced job-card padding, header spacing, injection table row height, typography and action-button size.
+- Water-only jobs remain especially compact because they have no injection table.
+- No changes to Rapid Planner calculations, shift logic, save integration, sequencing, history logic or injector calculations.
