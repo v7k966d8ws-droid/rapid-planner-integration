@@ -101,3 +101,6 @@
 
 /* Integration Build 3 */
 .shiftTab.waterShift{background:#eef4f0;box-shadow:inset 0 0 0 2px #6f8d79}.shiftTab.waterShift.active{background:#24583b;color:#fff}.irrigationOnlyInline{padding-right:4px}.waterOnlyResult{margin-top:12px;padding:14px;border-radius:10px;background:#eef4f0;color:#244b35;font-size:16px}.waterOnlyResult b{font-size:18px}.saveProgramCard{position:relative}
+
+/* Integration Build 3.2: clearer shift-card summary */
+.shiftTab .shiftOutlets{display:block;font-size:16px;line-height:1.05;margin-top:3px;font-weight:900}
