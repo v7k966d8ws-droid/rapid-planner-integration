@@ -1,0 +1,1193 @@
+:root{--g:#244B35;--bg:#eef3ef;--card:#fff;--line:#d4ddd6;--muted:#667068;--ok:#e5f2e7;--soon:#fff2c9;--due:#fde4d1;--late:#f7dada;--soft:#edf4ef;--blue:#e8f0f7}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#202522;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}.app{max-width:1240px;margin:auto;padding:14px}
+.hero{background:var(--g);color:#fff;padding:18px;border-radius:18px;margin-bottom:12px}.hero h1{margin:0 0 4px;font-size:28px}.hero p{margin:0;opacity:.9}.status{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.pill{padding:7px 10px;border-radius:999px;font-size:13px;font-weight:800}.on{background:#e8f5ea;color:#225b31}.off{background:#fff0d8;color:#795000}.local{background:#eaf0eb;color:#35533d}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}.tabs button{border:0;border-radius:12px;padding:12px 8px;background:#dfe9e1;color:var(--g);font-weight:900;font-size:15px}.tabs button.active{background:var(--g);color:#fff}.page{display:none}.page.active{display:block}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}.card h2,.card h3{margin:0 0 12px;color:var(--g)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}label{display:block;margin:0 0 6px;color:var(--muted);font-weight:800}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;border:1px solid #c9d3cb;border-radius:12px;padding:12px;background:#fff;font-size:16px}textarea{min-height:85px;resize:vertical}.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.primary,.secondary,.danger,.smallbtn{border:0;border-radius:12px;padding:12px 15px;font-weight:900}.primary{background:var(--g);color:#fff}.secondary{background:#e3ece5;color:var(--g)}.danger{background:#f5dfdf;color:#7d2d2d}.smallbtn{padding:8px 10px;background:#e3ece5;color:var(--g)}
+.outlets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.outlet{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--line);border-radius:11px;background:#fafbfa}.outlet input{width:auto}.outlet small{display:block;color:var(--muted)}.summary{padding:12px;border-radius:12px;background:var(--soft);color:var(--g);font-weight:900}.note{padding:12px;border-radius:12px;background:#f5f6f5;border:1px dashed #aeb9b1}.blue{background:var(--blue)}
+.timePicker{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fafcfa}.timeDisplay{font-size:28px;font-weight:900;color:var(--g);text-align:center;margin-bottom:5px}.timeHint{text-align:center;color:var(--muted);font-size:12px;margin-bottom:10px}.timeButtons{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.timeButtons button{border:0;border-radius:10px;padding:10px 6px;background:#e3ece5;color:var(--g);font-weight:900}.timeButtons .suggest{background:var(--g);color:#fff}
+.injectors{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.inj{border:1px solid var(--line);border-radius:14px;padding:12px}.inj h3{font-size:17px}.injFields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.injFields .wide{grid-column:1/-1}.hidden{display:none!important}.injMeta{font-size:13px;color:var(--muted);margin:-2px 0 8px}.calc{margin-top:9px;padding:9px;border-radius:9px;background:var(--soft);color:var(--g);font-weight:900}.runtimeBox{background:#eef5fb;color:#31566f}.warnBox{background:#fff4d8;color:#6e5200}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{border:1px solid var(--line);border-radius:13px;padding:12px;text-align:center}.stat strong{display:block;font-size:24px;color:var(--g)}.stat span{font-size:12px;color:var(--muted);font-weight:800}.statusFilters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.statusFilters button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 11px;font-weight:800;color:var(--g)}.statusFilters button.active{background:var(--g);color:#fff}.compactWrap,.history{overflow:auto}.compactTable{width:100%;border-collapse:collapse;min-width:780px}.compactTable th,.compactTable td{padding:7px 8px;border-bottom:1px solid var(--line);font-size:13px;text-align:left;white-space:nowrap}.compactTable th{color:var(--g);position:sticky;top:0;background:#fff}.compactRow.ok{background:var(--ok)}.compactRow.soon{background:var(--soon)}.compactRow.due{background:var(--due)}.compactRow.late{background:var(--late)}.compactRow.none{background:#f2f3f2}.badge{font-size:11px;font-weight:900;text-transform:uppercase}
+.history table,.planTable{width:100%;border-collapse:collapse;min-width:1350px}.history th,.history td,.planTable th,.planTable td{border-bottom:1px solid var(--line);padding:9px;text-align:left;font-size:13px;vertical-align:top}.history th,.planTable th{color:var(--g)}.setupFarm{border:1px solid var(--line);border-radius:12px;margin:8px 0;overflow:hidden}.setupFarm summary{padding:12px;background:#f4f7f4;color:var(--g);font-weight:900}.setupRows{padding:8px}.setupRow{display:grid;grid-template-columns:1.2fr .9fr .7fr;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #edf0ed}.setupRow:last-child{border-bottom:0}.muted{color:var(--muted);font-size:13px}
+.planHeader{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}.planCards{display:grid;gap:10px}.planCard{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}.planTop{display:grid;grid-template-columns:120px 1.2fr .9fr .8fr;gap:10px;align-items:center}.planTime{font-size:20px;font-weight:900;color:var(--g)}.planActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.planInjectWrap{overflow:auto;margin-top:10px;border:1px solid var(--line);border-radius:11px}
+.planInjectTable{width:100%;border-collapse:collapse;min-width:650px;background:#fbfdfb}
+.planInjectTable th,.planInjectTable td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px;vertical-align:middle}
+.planInjectTable th{color:var(--g);background:#f4f8f4;font-size:12px}
+.planInjectTable tr:last-child td{border-bottom:0}
+.planInjectorName{font-weight:900;color:var(--g);white-space:nowrap}
+.planProduct{font-weight:800}
+.planProductRate{font-size:11px;color:var(--muted);margin-top:2px}
+.planAmount{font-weight:800;white-space:nowrap}
+.planProgrammingValue{font-weight:900;color:var(--g);font-size:15px;white-space:nowrap}
+.fertSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.fertBox{border:1px solid var(--line);border-radius:12px;padding:12px}.fertBox h3{font-size:16px}.fertLine{padding:6px 0;border-bottom:1px solid #edf0ed}.fertLine:last-child{border-bottom:0}.empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.libraryAdd{display:grid;grid-template-columns:1.3fr 1fr .8fr auto;gap:8px;align-items:end}.libraryList{display:grid;gap:8px;margin-top:12px}.productRow{display:grid;grid-template-columns:1.3fr 1fr .8fr auto;gap:8px;align-items:end;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fafcfa}.productName{font-weight:900;color:var(--g);padding:11px 2px}.productDelete{border:0;border-radius:10px;padding:11px 13px;background:#f5dfdf;color:#7d2d2d;font-weight:900}.productMethodHelp{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:-2px}
+.batchBalanceBox{border:1px solid #c8d8cc;background:#f3f8f4;border-radius:11px;padding:10px 12px;font-size:13px;line-height:1.45;color:#405247}
+.batchBalanceBox strong{color:var(--g)}
+.batchBalanceBox.shortage{border-color:#d9aaaa;background:#fff1f1;color:#7b3030}
+.batchBalanceBox.shortage strong{color:#7b3030}
+.vatBuilderHead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.testBadge{display:inline-block;background:#fff2c7;color:#6d5200;border:1px solid #e8d28a;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900;margin-left:8px;vertical-align:middle}
+.vatGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.vatGrid>div:nth-child(-n+3){grid-column:span 1}
+.vatJobs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px}
+.vatJob{display:flex;gap:7px;align-items:center;border:1px solid var(--line);border-radius:9px;padding:7px 9px;min-height:48px;background:#fbfdfb}
+.vatJob input{margin-top:3px;transform:scale(1.15)}
+.vatJob strong{color:var(--g)}
+.vatJob small{display:block;color:var(--muted);margin-top:2px}
+.vatCalc{margin-top:12px;border:1px solid #bfd4c4;background:#f2f8f3;border-radius:13px;padding:12px}
+.vatCalcTop{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.vatMetric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px}
+.vatMetric span{display:block;font-size:11px;color:var(--muted);margin-bottom:3px}
+.vatMetric strong{font-size:17px;color:var(--g)}
+.vatTableWrap{overflow:auto}
+.vatTable{width:100%;border-collapse:collapse;min-width:820px}
+.vatTable th,.vatTable td{padding:8px;border-bottom:1px solid var(--line);text-align:left;font-size:12px;vertical-align:top}
+.vatTable th{color:var(--g);background:#edf5ef}
+.vatTable tr:last-child td{border-bottom:0}
+.vatAllocation{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.vatWarning{margin-top:9px;padding:9px 10px;background:#fff3d9;border:1px solid #e8c978;border-radius:10px;color:#6f5200;font-size:12px;line-height:1.4}
+.vatApplied{margin-top:9px;padding:9px 10px;background:#eaf5ed;border:1px solid #b9d5bf;border-radius:10px;color:#244b35;font-size:12px;font-weight:800}
+.programBanner{border:1px solid #b9d1bf;background:#f2f8f3;border-radius:14px;padding:12px;margin-bottom:12px}
+.programBanner.active{background:#e8f4ea;border-color:#94ba9c}
+.programTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.programTitle{font-size:18px;font-weight:900;color:var(--g)}
+.programMeta{font-size:12px;color:var(--muted);margin-top:4px}
+.programPill{display:inline-block;background:var(--g);color:#fff;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900}
+.programList{display:grid;gap:10px;margin-top:10px}
+.programCard{border:1px solid var(--line);border-radius:13px;padding:11px;background:#fff}
+.programCardHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.programSetRow{display:grid;grid-template-columns:75px 1fr 120px 120px;gap:10px;padding:8px 0;border-top:1px solid var(--line);align-items:start}
+.programSetRow:first-child{border-top:0}
+.programSetNo{font-weight:900;color:var(--g)}
+.programSetInj{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+.phaseChooser{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.phaseChoice{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;cursor:pointer}
+.phaseChoice input{margin-right:7px}
+.phaseChoice strong{color:var(--g)}
+.phaseHelp{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.35}
+.phaseBadge{display:inline-block;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:900}
+.phaseBadge.water{background:#e8f1fb;color:#24507d}
+.phaseBadge.fert{background:#e8f4ea;color:#28583a}
+.totalWaterBox{border:1px solid #c8d8cc;background:#f5f9f5;border-radius:11px;padding:10px;margin-top:9px;font-size:12px;line-height:1.45}
+@media(max-width:620px){.phaseChooser{grid-template-columns:1fr}}
+@media(max-width:760px){.programSetRow{grid-template-columns:70px 1fr 100px}.programSetRow>div:last-child{grid-column:2/-1}}
+
+@media(max-width:900px){.vatGrid{grid-template-columns:1fr 1fr}.vatJobs{grid-template-columns:1fr}.vatCalcTop{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.vatGrid{grid-template-columns:1fr}.vatCalcTop{grid-template-columns:1fr 1fr}}
+
+.injectorSetupRow{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:10px;align-items:end;padding:10px 0;border-bottom:1px solid var(--line)}.injectorSetupRow:last-child{border-bottom:0}.editBanner{display:none;margin-bottom:12px;padding:12px;border-radius:12px;background:#fff2c9;border:1px solid #e3ca7a;color:#5e4a00;font-weight:800}.editBanner.show{display:block}.batchTag,.pumpTag,.flushTag{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:800;margin:2px 4px 2px 0}.batchTag{background:#e8f0f7;color:#2f5069}.pumpTag{background:#e9f2e8;color:#31583a}.flushTag{background:#e7eff8;color:#2b5373}.ruleAdd{display:grid;grid-template-columns:1fr 1fr 1.3fr auto;gap:8px;align-items:end}.ruleRow{display:grid;grid-template-columns:.9fr 1fr 1.7fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.injHead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}.injHead h3{margin:0}.seqBtns{display:flex;gap:6px}.seqBtns button{border:0;border-radius:9px;padding:7px 10px;background:#e3ece5;color:var(--g);font-weight:900}.runtimeHelp,.preflowHelp{margin-top:5px;font-size:12px;color:var(--muted)}.runtimeRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}.runtimeRow button{white-space:nowrap}.aquaJob{border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;background:#fff}.aquaJobTop{display:grid;grid-template-columns:120px 1.4fr .7fr 1fr;gap:10px;align-items:start;margin-bottom:10px}.aquaInjectTable{width:100%;border-collapse:collapse;min-width:520px}.aquaInjectTable th,.aquaInjectTable td{padding:9px;border-bottom:1px solid var(--line);text-align:left}.aquaInjectTable th{color:var(--g);background:#f7faf7}.aquaInjectTable td:nth-child(2),.aquaInjectTable td:nth-child(3){font-size:18px;font-weight:900;color:var(--g)}.farmBulkBtns{display:flex;gap:8px;flex-wrap:wrap;padding:10px 8px 4px}.farmBulkBtns button{border:0;border-radius:10px;padding:9px 11px;font-weight:900}.finishAll{background:#f5dfdf;color:#7d2d2d}.activateAll{background:#e3ece5;color:var(--g)}.irrigationModeBar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:11px 12px;margin:10px 0 12px;border:1px solid var(--line);border-radius:12px;background:#f7faf7}.irrigationModeBar .modeText{font-weight:900;color:var(--g)}.irrigationOnlyBtn{border:0;border-radius:11px;padding:10px 13px;background:#e8f0f7;color:#2d526d;font-weight:900}.irrigationOnlyBtn.active{background:var(--g);color:#fff}.irrigationOnlyNote{padding:14px;border-radius:12px;background:#eef5fb;color:#31566f;font-weight:800;margin-bottom:10px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.injectors,.fertSummary{grid-template-columns:1fr}.outlets{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.planTop,.aquaJobTop{grid-template-columns:1fr 1fr}.ruleAdd,.ruleRow{grid-template-columns:1fr}.timeButtons{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.tabs{grid-template-columns:1fr 1fr}.outlets,.stats,.planTop,.injFields,.libraryAdd,.productRow{grid-template-columns:1fr}.injFields .wide{grid-column:auto}.hero h1{font-size:23px}.timeButtons{grid-template-columns:1fr 1fr}.injectorSetupRow{grid-template-columns:1fr}}
+
+.draftShiftList{display:grid;gap:8px;margin-top:12px}
+.draftShiftCard{border:1px solid #c8d8cc;background:#fff;border-radius:12px;padding:10px}
+.draftShiftTop{display:grid;grid-template-columns:90px 1fr 130px 130px;gap:10px;align-items:start}
+.draftShiftNumber{font-size:16px;font-weight:900;color:var(--g)}
+.draftShiftActions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.inlineField{display:flex;gap:8px;align-items:center}
+.inlineField input{flex:1}
+.fieldHelp{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.4}
+.shiftOptionBox{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fafcfa}
+.checkLine{display:flex;gap:8px;align-items:center;font-weight:800}
+.checkLine input{width:auto}
+.individualValveRuntimes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.valveRuntime{border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff}
+.valveRuntime label{margin:0 0 5px}
+#fertigationTimingCard.waterMode{opacity:.6}
+@media(max-width:760px){
+  .draftShiftTop{grid-template-columns:80px 1fr 100px}
+  .draftShiftTop>div:last-child{grid-column:2/-1}
+  .individualValveRuntimes{grid-template-columns:1fr 1fr}
+  .inlineField{align-items:stretch;flex-direction:column}
+}
+
+.waterOnlyInjectionCard{background:#f4f8f4}
+.waterOnlyInjectionCard .irrigationOnlyNote{display:block;margin:0}
+
+.inlineVatMix{border:1px solid #bfd3c4;background:#f7fbf7;border-radius:13px;padding:12px;margin:10px 0 14px}
+.inlineVatHead h3{margin:0 0 3px;color:var(--g)}
+.mixOutlets{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin-top:6px}
+.pumpSetupRow{display:grid;grid-template-columns:1.5fr .7fr 1fr auto;gap:10px;align-items:end;border-top:1px solid var(--line);padding:10px 0}
+.shuttleCapacityWrap{min-width:120px}
+@media(max-width:800px){.mixOutlets{grid-template-columns:repeat(3,minmax(0,1fr))}.pumpSetupRow{grid-template-columns:1fr 1fr}.pumpSetupRow button{grid-column:2}}
+
+/* Prepare-vat-first workflow */
+#vatRequirementCard .summary{align-self:end}
+#vatPreparePanel{border:2px solid #d7e7dc;padding:14px;border-radius:14px;background:#f7fbf8}
+#preparedVatStatus{min-height:58px}
+
+.farmProgramHeading{font-size:1.35rem;font-weight:800;margin:22px 0 8px;padding:10px 12px;border-bottom:2px solid #d7e7dc;color:#294f38}
+.vatRinseTag{display:inline-block;margin-top:4px;padding:3px 7px;border-radius:999px;background:#edf5ef;font-size:.82rem;font-weight:700;color:#294f38}
+
+/* Compact UI development — pass 1
+   Layout-only changes. No irrigation/fertigation calculation logic is changed. */
+@media (min-width: 901px){
+  .app{max-width:1440px;padding:8px 12px}
+  .hero{padding:11px 14px;border-radius:14px;margin-bottom:8px}
+  .hero h1{font-size:23px}
+  .status{margin-top:7px}
+  .pill{padding:5px 8px;font-size:11px}
+
+  .tabs{gap:6px;margin-bottom:8px}
+  .tabs button{padding:9px 7px;border-radius:10px;font-size:14px}
+
+  .card{padding:11px 13px;border-radius:13px;margin-bottom:8px}
+  .card h2,.card h3{margin-bottom:8px}
+  .grid{gap:8px 10px}
+  label{margin-bottom:4px;font-size:14px}
+  input,select,textarea{padding:9px 10px;border-radius:10px;font-size:15px}
+  textarea{min-height:62px}
+  .btns{gap:6px;margin-top:8px}
+  .primary,.secondary,.danger{padding:9px 12px;border-radius:10px}
+  .smallbtn{padding:6px 9px}
+
+  .programBanner{padding:9px 11px;margin-bottom:8px;border-radius:12px}
+  .programTitle{font-size:17px}
+  .programMeta{margin-top:2px}
+  .programList{gap:7px;margin-top:7px}
+  .programCard{padding:8px 10px}
+
+  .timePicker{padding:8px 10px;border-radius:11px}
+  .timeDisplay{font-size:24px;margin-bottom:2px}
+  .timeHint{margin-bottom:6px}
+  .timeButtons{gap:5px}
+  .timeButtons button{padding:7px 5px}
+
+  .outlets{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .outlet{padding:7px 8px;border-radius:9px}
+  .summary,.note{padding:9px 10px;border-radius:10px}
+
+  .inlineVatMix{padding:9px 10px;margin:7px 0 9px;border-radius:11px}
+  #vatPreparePanel{padding:10px;border-radius:11px}
+  #preparedVatStatus{min-height:42px}
+  .mixOutlets{gap:5px;margin-top:4px}
+  .vatGrid{gap:7px;margin-top:8px}
+  .vatCalc{margin-top:8px;padding:9px 10px}
+  .vatCalcTop{gap:6px;margin-bottom:6px}
+  .vatMetric{padding:6px 8px}
+  .vatMetric strong{font-size:15px}
+
+  .injectors{gap:7px}
+  .inj{padding:8px 10px;border-radius:11px}
+  .inj h3{font-size:16px}
+  .injHead{margin-bottom:5px}
+  .injMeta{font-size:12px;margin:-1px 0 5px}
+  .injFields{gap:6px 8px}
+  .seqBtns{gap:4px}
+  .seqBtns button{padding:5px 8px;border-radius:8px;font-size:13px}
+  .calc{margin-top:6px;padding:7px 8px}
+  .runtimeHelp,.preflowHelp,.fieldHelp{margin-top:3px;font-size:11px;line-height:1.25}
+  .runtimeRow{gap:6px}
+
+  .irrigationModeBar{padding:8px 10px;margin:7px 0 8px}
+  .irrigationOnlyNote{padding:9px 10px;margin-bottom:7px}
+  .individualValveRuntimes{gap:6px;margin-top:7px}
+  .valveRuntime{padding:6px 7px}
+
+  .draftShiftList{gap:6px;margin-top:8px}
+  .draftShiftCard{padding:7px 9px}
+  .draftShiftActions{margin-top:5px}
+}
+
+
+/* Compact UI development — pass 2
+   Structural layout only; calculations remain unchanged. */
+@media (min-width: 901px){
+  /* One-row start-time control */
+  .compactTimePicker{display:grid;grid-template-columns:.72fr .72fr 1.35fr .72fr .72fr;gap:6px;align-items:stretch;padding:6px}
+  .compactTimePicker>button{border:0;border-radius:9px;padding:6px 8px;background:#e3ece5;color:var(--g);font-weight:900;min-height:48px}
+  .compactTimePicker .timeCentre{background:var(--g);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center}
+  .compactTimePicker .timeDisplay{font-size:20px;line-height:1.05;color:inherit;margin:0}
+  .compactTimePicker .timeHint{font-size:10px;line-height:1.1;color:inherit;opacity:.82;margin:3px 0 0}
+
+  /* Reduce height of the options/summary area under outlets */
+  .shiftOptionBox{padding:7px 9px}
+  .shiftOptionBox .fieldHelp{display:inline;margin-left:8px}
+  #areaSummary{padding:7px 9px}
+  #pumpSystem,#requiredPumps,#finishDisplay,#setRuntimeDisplay{padding-top:7px;padding-bottom:7px}
+
+  /* Timing is now one compact row */
+  .compactTimingCard{display:grid;grid-template-columns:minmax(280px,1fr) auto minmax(260px,1fr);gap:10px;align-items:center;padding:8px 12px}
+  .compactTimingCard h2{font-size:18px;margin:0 0 2px}
+  .compactTimingCard p{margin:0;font-size:11px;line-height:1.2}
+  .compactTimingCard .secondary{padding:8px 11px;white-space:nowrap}
+  .compactTimingResult{margin:0;font-size:11px}
+
+  /* Denser injector programming while retaining readable touch targets */
+  .injFields{grid-template-columns:1fr 1fr 1fr 1fr;gap:6px 8px}
+  .injFields .wide{grid-column:span 2}
+  .injFields .batchBalanceBox.wide{grid-column:1/-1}
+  .injFields .activeFields.wide{grid-column:span 2}
+  .inj input,.inj select{padding:7px 8px}
+  .inj label{font-size:12px;margin-bottom:3px}
+  .inj .productMethodHelp{font-size:10px;line-height:1.15}
+  .batchBalanceBox{padding:7px 9px;line-height:1.3}
+  .runtimeRow{grid-template-columns:1fr auto}
+}
+
+
+/* Compact UI development — pass 3
+   Dense iPad/desktop layout. Visual/layout changes only. */
+@media (min-width: 901px){
+  /* Program header: remove unused vertical space while keeping controls touch-friendly */
+  .programBanner{padding:7px 10px;margin-bottom:7px}
+  .programTop{align-items:center}
+  .programTitle{font-size:16px;line-height:1.1}
+  .programMeta{font-size:11px;line-height:1.2;margin-top:2px}
+  .programPill{padding:4px 8px;font-size:10px}
+  .programBanner>.grid{display:block!important;margin-top:6px!important}
+  .programBanner>.grid>div{display:grid;grid-template-columns:105px minmax(260px,680px);gap:8px;align-items:center}
+  .programBanner>.grid label{margin:0}
+  .programBanner>.grid input{height:38px;padding:6px 9px}
+  .programBanner>.btns{margin-top:6px}
+  .programBanner>.btns button{padding:7px 11px}
+  .programCard{padding:6px 9px}
+  .draftShiftList{margin-top:6px}
+
+  /* New-plan heading and five essential job fields in one row */
+  .newPlanCard{padding:9px 12px}
+  .newPlanCard>h2{font-size:20px;line-height:1.1;margin:0 0 7px}
+  .jobBasicsGrid{grid-template-columns:1.05fr 1.05fr .95fr .72fr .85fr;gap:7px 9px;align-items:end}
+  .jobBasicsGrid>div{min-width:0}
+  .jobBasicsGrid>div:nth-child(1){grid-column:1}
+  .jobBasicsGrid>div:nth-child(2){grid-column:2}
+  .jobBasicsGrid>div:nth-child(3){grid-column:3}
+  .jobBasicsGrid>div:nth-child(4){grid-column:4}
+  .jobBasicsGrid>div:nth-child(5){grid-column:5}
+  .jobBasicsGrid>.full{grid-column:1/-1}
+  .jobBasicsGrid label{font-size:12px;line-height:1.05;margin-bottom:3px}
+  .jobBasicsGrid input,.jobBasicsGrid select{height:38px;padding:6px 9px;font-size:14px}
+
+  /* Pump selector stays one slim line */
+  .jobBasicsGrid>div:nth-child(6){margin-top:0}
+  .jobBasicsGrid>div:nth-child(6) .inlineField{display:grid;grid-template-columns:1fr auto;gap:7px}
+  .jobBasicsGrid>div:nth-child(6) .smallbtn{height:38px;padding:6px 10px}
+  .jobBasicsGrid>div:nth-child(6) .fieldHelp{font-size:10px;margin-top:2px}
+
+  /* Start time: short control strip instead of a card */
+  .compactTimePicker{height:44px;padding:3px;gap:4px;border-radius:9px}
+  .compactTimePicker>button{min-height:36px;height:36px;padding:3px 7px;border-radius:7px}
+  .compactTimePicker .timeDisplay{font-size:18px}
+  .compactTimePicker .timeHint{font-size:9px;margin-top:1px;white-space:nowrap}
+
+  /* Outlet section and summary area */
+  .jobBasicsGrid>div:nth-child(8) label{margin-bottom:3px}
+  .outlets{gap:4px}
+  .outlet{padding:5px 7px;min-height:46px}
+  .shiftOptionBox{padding:5px 8px}
+  .shiftOptionBox .fieldHelp{font-size:10px}
+  #areaSummary{padding:5px 8px}
+
+  /* Four informational fields become one compact row */
+  .jobBasicsGrid>div:nth-child(11),
+  .jobBasicsGrid>div:nth-child(12),
+  .jobBasicsGrid>div:nth-child(13),
+  .jobBasicsGrid>div:nth-child(14){grid-column:auto}
+  .jobBasicsGrid>div:nth-child(11){grid-column:1/3}
+  .jobBasicsGrid>div:nth-child(12){grid-column:3/5}
+  .jobBasicsGrid>div:nth-child(13){grid-column:5}
+  .jobBasicsGrid>div:nth-child(14){grid-column:1/2}
+  #pumpSystem,#requiredPumps,#finishDisplay,#setRuntimeDisplay{height:34px;padding:5px 8px;font-size:12px}
+  .jobBasicsGrid>div:nth-child(15){margin-top:-2px}
+  .jobBasicsGrid>div:nth-child(15) .note{padding:5px 8px;font-size:10px;line-height:1.2}
+
+  /* Fertigation timing strip */
+  .compactTimingCard{padding:6px 10px;margin-bottom:7px;grid-template-columns:minmax(230px,.9fr) auto minmax(250px,1fr)}
+  .compactTimingCard h2{font-size:16px}
+  .compactTimingCard .secondary{padding:6px 9px}
+}
+
+/* Keep the five-field row responsive on narrower tablets/portrait. */
+@media (min-width: 901px) and (max-width: 1150px){
+  .jobBasicsGrid{grid-template-columns:1fr 1fr 1fr}
+  .jobBasicsGrid>div:nth-child(1){grid-column:1}
+  .jobBasicsGrid>div:nth-child(2){grid-column:2}
+  .jobBasicsGrid>div:nth-child(3){grid-column:3}
+  .jobBasicsGrid>div:nth-child(4){grid-column:1}
+  .jobBasicsGrid>div:nth-child(5){grid-column:2}
+  .jobBasicsGrid>.full{grid-column:1/-1}
+  .jobBasicsGrid>div:nth-child(11),.jobBasicsGrid>div:nth-child(12),.jobBasicsGrid>div:nth-child(13),.jobBasicsGrid>div:nth-child(14){grid-column:auto}
+}
+
+/* Compact UI development — pass 4: guided vat workflow + AquaLink live summary */
+.compactVatWorkflow{padding:9px 11px;margin:2px 0 5px;border-color:#bfd6c7}
+.vatQuestionRow{display:grid;grid-template-columns:minmax(240px,1fr) minmax(260px,.8fr);gap:10px;align-items:end}
+.vatQuestionRow h2{font-size:17px;margin:0 0 2px}
+.vatQuestionRow label{font-size:11px;margin-bottom:2px}
+.vatQuestionRow select{height:36px;padding:5px 8px}
+.preparedVatCompact{margin-top:6px;padding:7px 9px;line-height:1.25}
+.vatStatusTitle{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:14px}
+.vatStatusTitle>span{font-weight:700;white-space:nowrap}
+.vatStatusLine{margin-top:3px;font-size:12px}
+.vatLabel{color:#607064}
+.vatStill{font-size:13px;background:#fff8d8;border-radius:6px;padding:4px 6px;margin-left:-2px;margin-right:-2px}
+.vatDone{color:#356347}
+.inlineVatMix{margin-top:7px;padding-top:7px;border-top:1px solid #d8e4dc}
+.inlineVatHead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:5px}
+.inlineVatHead h3{font-size:15px;margin:0}
+.inlineVatHead .muted{font-size:10px}
+.vatPrepareGrid{display:grid;grid-template-columns:1.2fr .65fr .7fr 1.35fr 1fr;gap:6px 8px;align-items:end}
+.vatPrepareGrid label,.vatOutletRow label{font-size:11px;margin-bottom:2px}
+.vatPrepareGrid input,.vatPrepareGrid select{height:35px;padding:5px 7px}
+.vatOutletRow{margin-top:6px}
+.compactVatWorkflow .mixOutlets{gap:4px}
+.compactVatWorkflow .mixOutlet{padding:4px 6px;min-height:42px}
+.compactVatWorkflow .vatCalc{padding:5px 8px;margin-top:5px;font-size:11px}
+.compactVatWorkflow .btns{margin-top:5px}
+.compactVatWorkflow .btns button{padding:6px 10px}
+
+.injectionHeadingRow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:5px}
+.injectionHeadingRow h2{margin:0;font-size:18px}
+.currentAquaSummary{margin:0}
+.currentAquaTable{width:100%;border-collapse:collapse;font-size:13px}
+.currentAquaTable th{padding:5px 8px;text-align:left;background:#eef4f0;border-bottom:1px solid #ccd9d0;font-size:11px;text-transform:uppercase;letter-spacing:.03em}
+.currentAquaTable td{padding:6px 8px;border-bottom:1px solid #e2e9e4;vertical-align:top}
+.currentAquaTable th:nth-child(2),.currentAquaTable th:nth-child(3),.currentAquaTable td:nth-child(2),.currentAquaTable td:nth-child(3){width:110px;text-align:center}
+.currentAquaTable td:nth-child(2) strong,.currentAquaTable td:nth-child(3) strong{font-size:17px}
+.aquaSub{font-size:10px;color:#68756c;margin-top:1px;font-weight:400}
+.injectionEditDetails{margin-top:5px;border-top:1px solid #dce5df;padding-top:4px}
+.injectionEditDetails>summary{cursor:pointer;font-size:12px;font-weight:700;color:#315c43;padding:5px 2px;user-select:none}
+.injectionEditDetails[open]>summary{margin-bottom:5px}
+
+@media (max-width:900px){
+ .vatQuestionRow{grid-template-columns:1fr}
+ .vatPrepareGrid{grid-template-columns:1fr 1fr}
+ .vatPrepareGrid>div:nth-child(4){grid-column:1/-1}
+ .vatStatusTitle{align-items:flex-start;flex-direction:column;gap:2px}
+}
+
+
+/* Compact UI development — pass 5: more information, less scrolling */
+@media (min-width:901px){
+  /* Outlet cards: same footprint, easier to read at a glance */
+  .outlet{min-height:52px;padding:6px 9px;gap:9px}
+  .outlet strong,.outlet>span:first-of-type{font-size:15px;line-height:1.05}
+  .outlet small{font-size:12px;line-height:1.05;margin-top:2px;font-weight:700}
+  .mixOutlet{font-size:14px;line-height:1.05}
+  .mixOutlet small{font-size:11px;font-weight:700}
+
+  /* Turn the lower job information into a compact dashboard strip */
+  .shiftOptionBox{padding:6px 9px!important;min-height:0}
+  .shiftOptionBox .fieldHelp{font-size:10px;line-height:1.15;margin-top:2px}
+  .jobBasicsGrid #areaSummary{height:34px;padding:6px 9px;display:flex;align-items:center;font-size:14px}
+  #pumpSystem,#requiredPumps,#finishDisplay,#setRuntimeDisplay{height:34px;padding:5px 8px;font-size:13px}
+
+  /* Prepared vat stays high in the workflow but occupies less height. */
+  .compactVatWorkflow{padding:7px 9px}
+  .preparedVatCompact{min-height:0!important;padding:6px 8px}
+  .vatStatusTitle{font-size:13px}
+  .vatStatusLine{font-size:11px;margin-top:2px}
+  .vatStill{font-size:12px;padding:3px 5px}
+  .compactVatWorkflow .mixOutlet{min-height:38px;padding:3px 6px}
+  .compactVatWorkflow .vatCalcTop{gap:5px}
+  .compactVatWorkflow .vatMetric{padding:5px 7px}
+  .compactVatWorkflow .vatMetric span{font-size:9px}
+  .compactVatWorkflow .vatMetric strong{font-size:13px}
+
+  /* Injection programming is now the one AquaLink-focused section. */
+  #injectionProgrammingCard{padding:9px 11px}
+  .injectionHeadingRow{margin-bottom:4px}
+  .injectionHeadingRow>div:first-child{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .compactPreflowButton{padding:5px 9px;font-size:11px;white-space:nowrap}
+  .currentAquaTable th{padding:4px 7px;font-size:10px}
+  .currentAquaTable td{padding:4px 7px;line-height:1.12}
+  .currentAquaTable td:nth-child(2) strong,.currentAquaTable td:nth-child(3) strong{font-size:16px}
+  .injectionEditDetails{margin-top:3px;padding-top:2px}
+  .injectionEditDetails>summary{padding:4px 2px}
+
+  /* Four injector editors fit as two columns with much less dead space. */
+  .injectors{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .inj{padding:7px 8px;border-radius:10px}
+  .injHead{margin-bottom:2px}
+  .inj h3{font-size:15px;margin:0}
+  .injMeta{font-size:10px;margin:0 0 4px}
+  .seqBtns{gap:3px}
+  .seqBtns button{padding:3px 6px;font-size:10px}
+  .injFields{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 6px}
+  .injFields .wide{grid-column:span 2}
+  .injFields .batchBalanceBox.wide{grid-column:1/-1}
+  .injFields label{font-size:10px;margin-bottom:1px}
+  .injFields input,.injFields select{height:32px;padding:4px 6px;font-size:12px}
+  .productMethodHelp,.runtimeHelp,.preflowHelp{font-size:9px;line-height:1.12;margin-top:2px}
+  .runtimeRow{gap:5px;align-items:end}
+  .runtimeRow .smallbtn{padding:5px 6px;font-size:10px}
+  .calc{margin-top:4px;padding:5px 7px;font-size:11px}
+  .batchBalanceBox{padding:5px 7px;font-size:10px;line-height:1.15}
+
+  /* Notes are useful, but do not need a large empty writing area. */
+  #notes{min-height:54px;height:54px}
+}
+
+@media (max-width:900px){
+  .compactPreflowButton{padding:6px 8px;font-size:11px}
+  .injectionHeadingRow{align-items:center}
+  .outlet{padding:8px 10px}
+  .outlet strong,.outlet>span:first-of-type{font-size:15px}
+  .outlet small{font-size:12px;font-weight:700}
+}
+
+/* Compact UI development — pass 6: larger touch/readability targets */
+@media (min-width:901px){
+  /* Prepared-vat outlets: keep the compact 5-column layout, but make the
+     outlet number and hectare value fill the available tile much better. */
+  .compactVatWorkflow .mixOutlet,
+  .compactVatWorkflow .vatJob{min-height:58px;padding:7px 10px;gap:10px;align-items:center}
+  .compactVatWorkflow .mixOutlet input,
+  .compactVatWorkflow .vatJob input{width:30px;height:30px;min-width:30px;margin:0;transform:none}
+  .compactVatWorkflow .mixOutlet strong,
+  .compactVatWorkflow .vatJob strong{font-size:21px;line-height:1;font-weight:900}
+  .compactVatWorkflow .mixOutlet small,
+  .compactVatWorkflow .vatJob small{font-size:16px;line-height:1.05;margin-top:3px;font-weight:800}
+
+  /* Normal job outlets now use the same visual scale as prepared-vat outlets. */
+  .outlet{min-height:58px;padding:7px 10px;gap:10px;align-items:center}
+  .outlet input{width:30px;height:30px;min-width:30px;margin:0}
+  .outlet strong,.outlet>span:first-of-type{font-size:21px;line-height:1;font-weight:900}
+  .outlet small{font-size:16px;line-height:1.05;margin-top:3px;font-weight:800}
+
+  /* Make the collapsed injector editor unmistakably actionable. */
+  .injectionEditDetails{margin-top:7px;padding-top:7px}
+  .injectionEditDetails>summary{display:inline-flex;align-items:center;min-height:44px;padding:9px 15px;border-radius:10px;background:#e3ece5;color:var(--g);font-size:16px;line-height:1;font-weight:900;list-style-position:inside}
+  .injectionEditDetails>summary:hover{background:#d8e6dc}
+  .injectionEditDetails[open]>summary{margin-bottom:8px}
+}
+
+@media (max-width:900px){
+  .compactVatWorkflow .mixOutlet,.compactVatWorkflow .vatJob,.outlet{min-height:58px;padding:8px 10px;gap:10px;align-items:center}
+  .compactVatWorkflow .mixOutlet input,.compactVatWorkflow .vatJob input,.outlet input{width:30px;height:30px;min-width:30px;margin:0;transform:none}
+  .compactVatWorkflow .mixOutlet strong,.compactVatWorkflow .vatJob strong,.outlet strong,.outlet>span:first-of-type{font-size:20px;line-height:1;font-weight:900}
+  .compactVatWorkflow .mixOutlet small,.compactVatWorkflow .vatJob small,.outlet small{font-size:15px;line-height:1.05;margin-top:3px;font-weight:800}
+  .injectionEditDetails>summary{display:inline-flex;align-items:center;min-height:44px;padding:9px 14px;border-radius:10px;background:#e3ece5;color:var(--g);font-size:16px;font-weight:900}
+}
+
+/* Compact UI development — pass 7: duration control + prominent vat status */
+.durationField{min-width:0}
+.durationControl{display:grid;grid-template-columns:auto auto minmax(92px,1fr) auto auto;gap:4px;align-items:stretch}
+.durationControl button,.durationControl select{height:46px;margin:0;border-radius:9px;font-weight:900}
+.durationStep{padding:6px 10px;background:#e3ece5;color:var(--g);border:1px solid #cddbd1;font-size:14px}
+.durationPicker{padding:5px 28px 5px 10px;background:#21573b;color:#fff;border:1px solid #21573b;text-align:center;text-align-last:center;font-size:20px}
+.vatStatusDashboard{display:grid;grid-template-columns:minmax(320px,1.1fr) minmax(300px,1.5fr) minmax(120px,.45fr);gap:10px;align-items:center}
+.vatStatusDetails{min-width:0}
+.vatStillHero{align-self:stretch;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5px 12px;border-radius:9px;background:#fff7d6;color:#315c43}
+.vatStillHero span{font-size:11px;font-weight:900;letter-spacing:.055em}
+.vatStillHero strong{font-size:25px;line-height:1.05;margin-top:2px;font-weight:900}
+.vatStillHero.complete{background:#dfeee3}
+.vatRemainingHero{text-align:right;display:flex;flex-direction:column;justify-content:center;white-space:nowrap}
+.vatRemainingHero strong{font-size:19px;line-height:1;font-weight:900;color:var(--g)}
+.vatRemainingHero span{font-size:11px;font-weight:700;margin-top:3px;color:#68756c}
+@media(max-width:900px){
+ .durationControl{grid-template-columns:auto auto minmax(90px,1fr) auto auto}
+ .durationStep{padding:6px 7px;font-size:13px}
+ .vatStatusDashboard{grid-template-columns:1fr}
+ .vatStillHero{align-items:flex-start;text-align:left}
+ .vatRemainingHero{position:absolute;right:14px;top:14px}
+ .preparedVatCompact{position:relative}
+}
+
+/* Compact UI development — pass 8: reliable landscape time controls */
+@media (min-width:1151px){
+  /* Keep the four simple job fields on the first line and give duration a full line. */
+  .jobBasicsGrid{grid-template-columns:1fr 1fr .95fr .72fr .72fr}
+  .jobBasicsGrid>div:nth-child(1){grid-column:1}
+  .jobBasicsGrid>div:nth-child(2){grid-column:2}
+  .jobBasicsGrid>div:nth-child(3){grid-column:3}
+  .jobBasicsGrid>div:nth-child(5){grid-column:4/6}
+  .jobBasicsGrid>div.durationField{grid-column:1/-1}
+  .durationControl{grid-template-columns:minmax(100px,.55fr) minmax(100px,.55fr) minmax(280px,2fr) minmax(100px,.55fr) minmax(100px,.55fr);gap:6px}
+  .durationControl button,.durationControl select{height:42px}
+  .durationStep{font-size:15px}
+  .durationPicker{font-size:20px}
+}
+
+/* Each visible pump-time button owns its complete touch area. */
+.compactTimePicker{display:grid;grid-template-columns:minmax(90px,.75fr) minmax(90px,.75fr) minmax(260px,1.7fr) minmax(90px,.75fr) minmax(90px,.75fr);gap:6px;overflow:visible}
+.compactTimePicker>button{position:relative;z-index:1;width:100%;min-width:0;touch-action:manipulation;cursor:pointer}
+.compactTimePicker .timeCentre{z-index:1;overflow:hidden}
+.compactTimePicker .timeHint{pointer-events:none;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:900px){
+  .compactTimePicker{grid-template-columns:minmax(54px,.65fr) minmax(54px,.65fr) minmax(190px,2fr) minmax(54px,.65fr) minmax(54px,.65fr)}
+}
+
+/* Compact UI development — pass 9: matched duration/start-time proportions */
+.durationControl,
+.compactTimePicker{
+  grid-template-columns:minmax(72px,.72fr) minmax(72px,.72fr) minmax(190px,1.65fr) minmax(72px,.72fr) minmax(72px,.72fr);
+  gap:6px;
+}
+.durationControl button,.durationControl select,
+.compactTimePicker>button{height:46px;min-height:46px}
+
+@media (min-width:901px){
+  .durationControl,
+  .compactTimePicker{
+    grid-template-columns:minmax(90px,.75fr) minmax(90px,.75fr) minmax(250px,1.7fr) minmax(90px,.75fr) minmax(90px,.75fr);
+  }
+}
+
+@media (max-width:900px){
+  .durationControl,
+  .compactTimePicker{
+    grid-template-columns:minmax(52px,.72fr) minmax(52px,.72fr) minmax(150px,1.65fr) minmax(52px,.72fr) minmax(52px,.72fr);
+    gap:5px;
+  }
+  .durationStep{padding:6px 4px;font-size:14px}
+  .durationPicker{font-size:20px;padding-left:6px;padding-right:22px}
+  .compactTimePicker>button{padding-left:5px;padding-right:5px}
+  .compactTimePicker .timeDisplay{font-size:clamp(20px,4.7vw,30px);white-space:nowrap}
+  .compactTimePicker .timeHint{font-size:11px;white-space:nowrap}
+}
+
+@media (max-width:600px){
+  .durationControl,
+  .compactTimePicker{
+    grid-template-columns:minmax(46px,.68fr) minmax(46px,.68fr) minmax(136px,1.55fr) minmax(46px,.68fr) minmax(46px,.68fr);
+    gap:4px;
+  }
+}
+
+/* Pass 10 — collapse prepared-vat setup after preparation */
+.vatDetailsToggle{margin-top:8px;padding:7px 12px;min-height:34px;font-size:12px;font-weight:800;width:auto}
+@media (max-width:800px){.vatDetailsToggle{width:100%;min-height:42px;font-size:13px}}
+
+
+/* Pass 10 final polish — portrait pump time + clearer current-job outlet heading */
+.jobOutletHeading{font-size:18px;line-height:1.2;font-weight:900;color:var(--g);margin:2px 0 9px}
+@media (max-width:900px){
+  .jobOutletHeading{font-size:20px;margin:4px 0 10px}
+  .compactTimePicker .timeCentre{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+  .compactTimePicker .timeDisplay{display:block;line-height:1;font-size:clamp(22px,4.9vw,30px);margin:0}
+  .compactTimePicker .timeHint{display:block;line-height:1.05;font-size:10px;margin:2px 0 0;max-width:100%;white-space:nowrap}
+}
+@media (max-width:600px){
+  .compactTimePicker{grid-template-columns:minmax(44px,.62fr) minmax(44px,.62fr) minmax(150px,1.9fr) minmax(44px,.62fr) minmax(44px,.62fr)}
+  .compactTimePicker .timeDisplay{font-size:clamp(22px,6vw,28px)}
+  .compactTimePicker .timeHint{font-size:9px}
+}
+
+/* UI Build 2 — responsive Plan Irrigation layout only. Calculation logic unchanged. */
+/* iPad portrait / medium widths: dates share one row, farm stays full width. */
+@media (min-width: 601px) and (max-width: 900px){
+  .jobBasicsGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;align-items:end}
+  .jobBasicsGrid>div:nth-child(1){grid-column:1}
+  .jobBasicsGrid>div:nth-child(2){grid-column:2}
+  .jobBasicsGrid>div:nth-child(3){grid-column:1/-1}
+  .jobBasicsGrid>div.durationField{grid-column:1/-1}
+  .jobBasicsGrid>div:nth-child(5){grid-column:1/-1}
+  .jobBasicsGrid>.full{grid-column:1/-1}
+}
+
+/* iPad landscape / wide screens: use the full first row and give duration buttons breathing room. */
+@media (min-width: 901px){
+  .jobBasicsGrid{grid-template-columns:minmax(210px,1fr) minmax(210px,1fr) minmax(250px,1.18fr) minmax(250px,1.18fr);column-gap:14px;row-gap:8px}
+  .jobBasicsGrid>div:nth-child(1){grid-column:1}
+  .jobBasicsGrid>div:nth-child(2){grid-column:2}
+  .jobBasicsGrid>div:nth-child(3){grid-column:4}
+  .jobBasicsGrid>div.durationField{grid-column:1/4}
+  .jobBasicsGrid>div:nth-child(5){grid-column:4}
+  .jobBasicsGrid>.full{grid-column:1/-1}
+  .durationControl{gap:10px;grid-template-columns:minmax(105px,.7fr) minmax(105px,.7fr) minmax(260px,1.8fr) minmax(105px,.7fr) minmax(105px,.7fr)}
+}
+
+/* Narrow phones retain the existing stacked layout. */
+@media (max-width: 600px){
+  .jobBasicsGrid{display:grid;grid-template-columns:1fr}
+  .jobBasicsGrid>div:nth-child(1),.jobBasicsGrid>div:nth-child(2),.jobBasicsGrid>div:nth-child(3),.jobBasicsGrid>div.durationField,.jobBasicsGrid>div:nth-child(5),.jobBasicsGrid>.full{grid-column:1}
+}
+.jobOutletHelp{margin:-5px 0 9px;font-size:12px}
+@media(max-width:900px){.jobOutletHelp{font-size:13px;margin:-5px 0 10px}}
+
+/* UI Build 2.1 — orientation-aware iPad layout correction.
+   iPad landscape: spread dates and Farm across the full row.
+   iPad portrait: keep dates side-by-side and Farm full width.
+   Phones remain stacked. */
+@media (min-width: 700px) and (orientation: landscape){
+  .jobBasicsGrid{
+    display:grid;
+    grid-template-columns:minmax(180px,1fr) minmax(180px,1fr) minmax(90px,.35fr) minmax(90px,.35fr) minmax(260px,1.15fr);
+    column-gap:16px;
+    row-gap:9px;
+    align-items:end;
+  }
+  .jobBasicsGrid>div:nth-child(1){grid-column:1}
+  .jobBasicsGrid>div:nth-child(2){grid-column:2}
+  .jobBasicsGrid>div:nth-child(3){grid-column:5}
+  .jobBasicsGrid>div.durationField{grid-column:1/5}
+  .jobBasicsGrid>div:nth-child(5){grid-column:5}
+  .jobBasicsGrid>.full{grid-column:1/-1}
+  .durationControl{
+    grid-template-columns:minmax(105px,.72fr) minmax(105px,.72fr) minmax(250px,1.75fr) minmax(105px,.72fr) minmax(105px,.72fr);
+    gap:14px;
+  }
+}
+
+@media (min-width: 700px) and (orientation: portrait){
+  .jobBasicsGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;align-items:end}
+  .jobBasicsGrid>div:nth-child(1){grid-column:1}
+  .jobBasicsGrid>div:nth-child(2){grid-column:2}
+  .jobBasicsGrid>div:nth-child(3){grid-column:1/-1}
+  .jobBasicsGrid>div.durationField,
+  .jobBasicsGrid>div:nth-child(5),
+  .jobBasicsGrid>.full{grid-column:1/-1}
+}
+
+/* UI Build 2.2 — narrow-phone containment + live prepared-vat outlet choices. */
+.currentJobOutletSummary{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 10px;padding:9px 11px;border:1px solid #cbd9cf;border-radius:10px;background:#f7faf8;font-size:13px}
+.currentJobOutletSummary strong{color:var(--g);font-size:15px}.currentJobOutletSummary button{margin-left:auto;width:auto}
+.vatOutletEmpty{grid-column:1/-1;padding:10px 0}
+@media (max-width:600px){
+  html,body{max-width:100%;overflow-x:hidden}
+  *,*::before,*::after{box-sizing:border-box}
+  .app,.page,.card,.newPlanCard,.grid,.jobBasicsGrid,.jobBasicsGrid>div,.full,.durationField{min-width:0;max-width:100%}
+  .newPlanCard input,.newPlanCard select,.newPlanCard textarea{max-width:100%;min-width:0;width:100%}
+  .durationControl,.compactTimePicker{width:100%;max-width:100%;min-width:0;grid-template-columns:minmax(38px,.65fr) minmax(38px,.65fr) minmax(92px,1.55fr) minmax(38px,.65fr) minmax(38px,.65fr);gap:4px}
+  .durationControl>* ,.compactTimePicker>*{min-width:0;max-width:100%}
+  .durationStep,.compactTimePicker>button{padding-left:2px;padding-right:2px;font-size:13px}
+  .durationPicker{font-size:18px;padding-left:4px;padding-right:18px}
+  .compactTimePicker .timeDisplay{font-size:22px}
+  .pumpRuleRow,.shiftPumpRow{min-width:0;max-width:100%;grid-template-columns:1fr!important}
+  .pumpRuleRow button,.shiftPumpRow button{width:100%;max-width:100%}
+  .currentJobOutletSummary{align-items:flex-start}.currentJobOutletSummary button{width:100%;margin-left:0}
+}
+
+/* UI Build 2.3 — compact phone outlet selector.
+   Keep tablet/iPad layouts unchanged; phones use three compact columns. */
+@media (max-width:600px){
+  .outlets{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:6px;
+    width:100%;
+  }
+  .outlet{
+    min-width:0;
+    min-height:64px;
+    padding:7px 8px;
+    gap:7px;
+    border-radius:10px;
+    align-items:center;
+  }
+  .outlet input{
+    width:28px;
+    height:28px;
+    min-width:28px;
+    flex:0 0 28px;
+    margin:0;
+  }
+  .outlet strong,.outlet>span:first-of-type{
+    font-size:19px;
+    line-height:1;
+    font-weight:900;
+  }
+  .outlet small{
+    font-size:13px;
+    line-height:1.05;
+    margin-top:3px;
+    font-weight:800;
+    white-space:nowrap;
+  }
+}
+
+
+/* UI Build 2.3 — phone outlet compaction, Safari date containment,
+   and removal of the unused Individual Valve Runtimes control from the UI. */
+.shiftOptionBox{display:none!important}
+@media (max-width:600px){
+  .jobBasicsGrid input[type="date"]{
+    display:block;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+  .jobOutletSection .outlets{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:7px!important;
+  }
+  .jobOutletSection .outlet{
+    min-width:0!important;
+    min-height:68px!important;
+    padding:7px 8px!important;
+    gap:7px!important;
+    border-radius:10px!important;
+  }
+  .jobOutletSection .outlet input{
+    width:28px!important;
+    height:28px!important;
+    min-width:28px!important;
+  }
+  .jobOutletSection .outlet strong,
+  .jobOutletSection .outlet>span:first-of-type{font-size:20px!important;line-height:1!important}
+  .jobOutletSection .outlet small{font-size:14px!important;line-height:1.05!important;margin-top:3px!important}
+}
+
+/* UI Build 2.3.1 — phone polish only. */
+@media (max-width:600px){
+  /* Safari date inputs can retain an intrinsic inline size. Constrain both the
+     grid item and native control to the same inner width as Farm. */
+  .jobBasicsGrid>div:nth-child(1),
+  .jobBasicsGrid>div:nth-child(2){min-width:0!important;width:100%!important;max-width:100%!important;overflow:hidden}
+  .jobBasicsGrid input[type="date"]{
+    inline-size:100%!important;
+    width:100%!important;
+    max-inline-size:100%!important;
+    max-width:100%!important;
+    min-inline-size:0!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+
+  /* Prepared-vat summary: stack details, litres and yellow status so no text
+     can collide on narrow phone screens. */
+  .vatStatusDashboard{display:flex!important;flex-direction:column!important;gap:10px!important}
+  .vatStatusDetails,.vatStillHero,.vatRemainingHero{width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+  .vatStatusDetails{order:1!important}
+  .vatRemainingHero{order:2!important;display:flex!important;flex-direction:row!important;align-items:baseline!important;justify-content:flex-start!important;gap:8px!important;text-align:left!important;padding:0 2px!important}
+  .vatRemainingHero strong{font-size:26px!important;line-height:1!important}
+  .vatRemainingHero span{font-size:13px!important}
+  .vatStillHero{order:3!important}
+  .vatStatusLine{overflow-wrap:anywhere}
+}
+
+/* UI Build 2.3.2 — phone-only polish.
+   1) Keep Safari date controls fully inside the same visual width as Farm.
+   2) Give prepared-vat remaining litres a true in-flow row (no overlap).
+   3) Keep current-job vat outlets in place; mark selected ones red/smaller. */
+@media (max-width:600px){
+  .jobBasicsGrid>div:nth-child(1),
+  .jobBasicsGrid>div:nth-child(2){overflow:visible!important;padding-right:0!important}
+  .jobBasicsGrid input[type="date"]{
+    position:relative!important;
+    inline-size:calc(100% - 2px)!important;
+    width:calc(100% - 2px)!important;
+    max-inline-size:calc(100% - 2px)!important;
+    max-width:calc(100% - 2px)!important;
+    margin-right:2px!important;
+    border:1px solid #cbd6cd!important;
+    border-radius:12px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+
+  .vatStatusDashboard{position:static!important;display:flex!important;flex-direction:column!important;gap:10px!important}
+  .preparedVatCompact{position:static!important}
+  .vatRemainingHero{
+    position:static!important;
+    inset:auto!important;
+    order:2!important;
+    width:100%!important;
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:baseline!important;
+    justify-content:flex-start!important;
+    gap:7px!important;
+    padding:6px 2px 2px!important;
+    margin:0!important;
+    text-align:left!important;
+    white-space:normal!important;
+  }
+  .vatRemainingHero strong{font-size:23px!important;line-height:1.05!important}
+  .vatRemainingHero span{font-size:13px!important;line-height:1.1!important;margin:0!important}
+  .vatStillHero{order:3!important}
+
+  .preparedVatLiveChoices label.outlet.vatChosenNow{
+    border-color:#d9a3a3!important;
+    background:#fff7f7!important;
+  }
+  .preparedVatLiveChoices label.outlet.vatChosenNow strong,
+  .preparedVatLiveChoices label.outlet.vatChosenNow small,
+  .preparedVatLiveChoices label.outlet.vatChosenNow span{
+    color:#b33a3a!important;
+  }
+  .preparedVatLiveChoices label.outlet.vatChosenNow strong,
+  .preparedVatLiveChoices label.outlet.vatChosenNow>span:first-of-type{
+    font-size:18px!important;
+  }
+  .preparedVatLiveChoices label.outlet.vatChosenNow small{font-size:13px!important}
+}
+
+
+/* UI Build 2.3.4 — prepared-vat selection indicator refinement.
+   Keep outlet tiles visually normal. In the yellow Still to fertigate list,
+   current-job selections stay listed at the same size and turn red. */
+.preparedVatLiveChoices label.outlet.vatChosenNow{
+  border-color:inherit!important;
+  background:inherit!important;
+}
+.preparedVatLiveChoices label.outlet.vatChosenNow strong,
+.preparedVatLiveChoices label.outlet.vatChosenNow small,
+.preparedVatLiveChoices label.outlet.vatChosenNow span{
+  color:inherit!important;
+  font-size:inherit!important;
+}
+.vatStillHero strong .vatStillOutlet{color:inherit;font:inherit}
+.vatStillHero strong .vatStillOutlet.selectedNow{color:#b33a3a!important}
+.vatStillHero strong .vatStillSep{color:inherit;font:inherit}
+/* Shuttle Tracking Build 1 */
+.directShuttlePanel{border:1px solid #cfd8d2;border-radius:10px;padding:10px 12px;background:#f7faf8}
+.shuttleCheckLabel{display:flex;align-items:center;gap:9px;font-weight:700;margin:0}
+.shuttleCheckLabel input{width:22px;height:22px;flex:0 0 auto}
+.newShuttleAmount{margin-top:10px;max-width:360px}
+.batchBalanceBox.shortage{border-left:5px solid #b54708;padding-left:12px}
+
+/* UI Branding Polish — Pass 1 */
+.heroBrand{display:flex;align-items:center;gap:22px}
+.brandLogoSlot{flex:0 0 auto;min-width:145px;padding:10px 14px;border:1px solid rgba(255,255,255,.28);border-radius:12px;background:rgba(255,255,255,.08);font-weight:800;font-size:21px;letter-spacing:.2px;text-align:center;white-space:nowrap}
+.heroCopy{min-width:0}.heroCopy h1{margin-top:0}.heroCopy p{margin-bottom:0}
+.statusFilterBar,.historyHeader{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.statusFilterBar{margin-bottom:10px}.statusFilterBar .statusFilters{margin-bottom:0}
+.farmFilter{display:flex;align-items:center;gap:8px}.farmFilter label{margin:0;font-weight:700;white-space:nowrap}.farmFilter select{width:auto;min-width:180px;padding:9px 34px 9px 12px}
+.historyHeader{margin-bottom:8px}.historyHeader h2{margin-bottom:0}
+@media(max-width:700px){.heroBrand{align-items:flex-start;flex-direction:column;gap:10px}.brandLogoSlot{min-width:0}.statusFilterBar{align-items:stretch}.farmFilter{width:100%}.farmFilter select{flex:1;min-width:0}}
+
+/* UI Branding Polish — Pass 3 */
+.fieldInstructionsHead{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.fieldInstructionsHead h2{margin-bottom:3px}.fieldInstructionsHead p{margin:0}
+.fieldInstructionsText{white-space:pre-wrap;font:inherit;font-size:17px;line-height:1.55;background:#f3f8f4;border:1px solid #cfddd2;border-radius:12px;padding:14px 16px;margin:14px 0 0;color:#173d28}
+.statusFilterBar{align-items:center}.farmFilter{margin-left:auto}
+@media(max-width:900px){.fieldInstructionsHead{align-items:stretch}.fieldInstructionsHead button{min-height:48px}.statusFilterBar{align-items:stretch}.farmFilter{margin-left:0}}
+@media(max-width:700px){.fieldInstructionsHead{display:block}.fieldInstructionsHead button{width:100%;margin-top:10px}.fieldInstructionsText{font-size:16px;padding:12px}.statusFilters{display:flex;gap:7px;overflow-x:auto;padding-bottom:3px}.statusFilters button{flex:0 0 auto}.farmFilter{display:grid;grid-template-columns:auto 1fr;align-items:center}.farmFilter select{width:100%}}
+
+/* Compact UI Experiment — Build 1
+   Purposefully dense field-work layout. No calculation logic changes. */
+.currentNightPanel{border:2px solid #a9c9b2;background:#f4faf5}
+.currentNightHead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.currentNightHead h2{margin:0 0 2px;font-size:19px}
+.currentNightProgramList{margin-top:7px;border-top:1px solid #d6e3d9}
+.currentNightRow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px solid #dce7df}
+.currentNightRow>div{min-width:0}.currentNightRow strong{font-size:15px}.currentNightRow span{margin-left:10px;font-size:13px;color:#617066}
+.currentNightRow>.miniFert,.currentNightRow>.miniWater{margin:0;padding:3px 7px;border-radius:999px;font-size:10px;font-weight:900;white-space:nowrap}
+.miniFert{background:#dcefe1;color:#245536!important}.miniWater{background:#e7eef7;color:#34516f!important}
+
+@media (min-width:901px){
+  /* Flatten the page into tight information bands rather than tall cards. */
+  #new .card{margin-bottom:6px;padding:8px 11px}
+  #new .newPlanCard{padding:8px 11px}
+  #new .newPlanCard>h2{font-size:18px;margin-bottom:5px}
+  #new label{font-size:11px;margin-bottom:2px}
+  #new input,#new select{height:34px;padding:4px 8px;font-size:13px}
+  #new textarea{min-height:40px;padding:7px 9px;font-size:13px}
+  #new .fieldHelp,#new .muted{font-size:10px;line-height:1.15}
+  #new .btns{margin-top:6px}
+  #new .btns button{padding:7px 10px}
+  #new .programBanner{padding:6px 9px}
+  #new .programBanner>.grid input{height:34px}
+  #new .programBanner>.btns button{padding:6px 9px}
+  #new .compactTimePicker{height:39px}
+  #new .compactTimePicker>button{height:31px;min-height:31px}
+  #new .compactTimePicker .timeDisplay{font-size:16px}
+  #new .jobOutletSection{margin-top:0}
+  #new .jobOutletHeading{font-size:17px;margin-bottom:1px}
+  #new .outlets{gap:4px}
+  #new .outlet{min-height:42px;padding:4px 6px}
+  #new .outlet input{width:25px;height:25px;min-width:25px}
+  #new .outlet strong,#new .outlet>span:first-of-type{font-size:17px}
+  #new .outlet small{font-size:12px;margin-top:1px}
+  #new .note,#new .summary{padding:5px 8px}
+  #new #injectionProgrammingCard{padding:7px 10px}
+  #new .injectionHeadingRow h2{font-size:18px;margin:0}
+  #new .currentAquaSummary{margin-top:4px}
+  #new details.injectionEditDetails{margin-top:5px}
+  #new details.injectionEditDetails>summary{padding:6px 8px}
+  #new .compactJobActions{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
+  #new .compactJobActions>label{grid-column:1/-1;margin-bottom:-6px}
+  #new .compactJobActions textarea{grid-column:1}
+  #new .compactJobActions .btns{grid-column:2;margin:0;white-space:nowrap}
+  #new .currentNightPanel{padding:8px 11px;margin-bottom:10px}
+  #new .currentNightHead h2{font-size:18px}
+}
+
+@media (max-width:900px){
+  .currentNightHead{align-items:stretch;flex-direction:column}
+  .currentNightHead button{width:100%;min-height:46px}
+  .currentNightRow{align-items:flex-start}
+  .currentNightRow>div{display:flex;flex-direction:column;gap:2px}
+  .currentNightRow span{margin-left:0}
+}
+
+/* Compact UI Experiment — Build 2: render-matched desktop/iPad landscape */
+@media (min-width:901px){
+  body{background:#f3f7f4}
+  .app{max-width:1460px;padding:8px 14px 14px}
+  .hero{background:transparent;color:var(--g);padding:2px 10px 7px;margin:0;border-radius:0}
+  .heroBrand{gap:14px}.brandLogoSlot{min-width:260px;padding:0;border:0;background:transparent;text-align:left;font-size:0}
+  .brandLogoSlot:before{content:"❧  DD PRODUCE";font-size:26px;font-weight:950;font-style:italic;letter-spacing:.4px;color:#17663c}
+  .brandLogoSlot:after{content:"IRRIGATION & FERTIGATION PLANNER";display:block;margin-left:39px;margin-top:-2px;font-size:10px;font-weight:900;color:#1d2921;letter-spacing:.2px}
+  .heroCopy{display:none}.status{display:none}
+  .tabs{grid-template-columns:repeat(5,minmax(120px,1fr));gap:8px;margin:0 auto 8px;max-width:760px;transform:translateY(-46px);margin-bottom:-38px}
+  .tabs button{padding:10px 8px;border-radius:6px;font-size:14px}
+  #new{border:1px solid #cad9ce;border-radius:12px;background:#fff;padding:9px 10px}
+  #new .programBanner{border:0;background:transparent;padding:0;margin:0 0 7px}
+  #new .programTop{align-items:center}
+  #new .programTitle{font-size:26px!important;line-height:1.05;color:#154c31;font-weight:950}
+  #new .programTitle::first-line{font-size:26px}
+  #new .programMeta{font-size:13px;margin-top:3px}
+  #new .programPill{font-size:12px;padding:5px 8px}
+  #new .programBanner>.grid,#new .programBanner>.btns,#new #draftShiftList{display:none!important}
+  #new .newPlanCard{border:0;border-radius:0;padding:0!important;margin:0!important;background:transparent}
+  #new .newPlanCard>h2{display:none}
+  #new .jobBasicsGrid{display:block!important}
+  #new .compactTopRow{display:grid;grid-template-columns:1fr 1fr .92fr .92fr 1.3fr;gap:0;border:1px solid #d8e1da;border-radius:8px;overflow:hidden;margin-bottom:8px}
+  #new .compactTopRow>div{padding:6px 8px;border-right:1px solid #dfe6e1;min-width:0}
+  #new .compactTopRow>div:last-child{border-right:0;background:#f0f7f2}
+  #new .compactTopRow label{font-size:11px;margin-bottom:3px}
+  #new .compactTopRow input,#new .compactTopRow select{height:36px!important;border-radius:5px!important;padding:5px 8px!important;font-size:14px!important}
+  #new .compactWorkbench{display:grid;grid-template-columns:1.05fr .78fr 1.02fr;gap:8px;align-items:stretch}
+  #new .compactColumn{border:1px solid #d8e1da;border-radius:8px;padding:8px;background:#fff;min-width:0}
+  #new .compactColumn h2,#new .jobOutletHeading{font-size:18px;margin:0 0 3px;color:#154c31}
+  #new .compactOutlets .jobOutletHelp{display:none}
+  #new .compactOutlets .outlets{grid-template-columns:repeat(5,1fr)!important;gap:5px!important}
+  #new .compactOutlets .outlet{min-height:66px!important;padding:5px 7px!important;border-radius:5px!important;align-items:flex-start!important;position:relative}
+  #new .compactOutlets .outlet input{width:20px!important;height:20px!important;min-width:20px!important;margin-top:2px}
+  #new .compactOutlets .outlet strong,#new .compactOutlets .outlet>span:first-of-type{font-size:17px!important;line-height:1.05}
+  #new .compactOutlets .outlet small{font-size:11px!important}
+  #new .compactOutlets #areaSummary{margin-top:45px!important;height:auto!important;padding:10px!important;font-size:16px!important;background:#e5f3e8}
+  #new .compactTiming .durationField{margin-bottom:12px}
+  #new .compactTiming .durationControl{display:grid;grid-template-columns:.7fr .7fr 1.15fr .7fr .7fr;gap:5px}
+  #new .compactTiming .durationControl>*{height:46px!important;border-radius:6px!important;font-weight:900}
+  #new .compactTiming .compactTimePicker{display:grid!important;grid-template-columns:1fr 1fr!important;height:auto!important;border:0!important;padding:0!important;gap:7px;background:transparent!important;margin-bottom:9px}
+  #new .compactTiming .compactTimePicker button{display:none!important}
+  #new .compactTiming .compactTimePicker #useSuggested{display:flex!important;height:44px!important;grid-column:1!important;background:#fff!important;color:#222!important;border:1px solid #cbd6ce!important;justify-content:center}
+  #new .compactTiming .finishCompact{display:block!important}
+  #new .compactTiming .finishCompact input{height:44px!important;background:#f8faf8}
+  #new .compactTiming .pumpCompact{margin-top:10px}
+  #new .compactTiming .pumpCompact .inlineField{display:block!important}
+  #new .compactTiming .pumpCompact button,#new .compactTiming .pumpCompact .fieldHelp{display:none!important}
+  #new .compactTiming .pumpCompact input{height:42px!important}
+  #new .compactVatColumn{padding:8px!important}
+  #new .compactVatColumn #vatRequirementCard{display:block!important;border:0!important;padding:0!important;margin:0 0 6px!important;background:transparent!important}
+  #new .compactVatColumn #vatRequirementCard.hidden{display:none!important}
+  #new .compactVatColumn .vatQuestionRow{grid-template-columns:1fr auto!important;gap:7px;align-items:center}
+  #new .compactVatColumn .vatQuestionRow .fieldHelp{display:none}
+  #new .compactVatColumn .vatQuestionRow select{height:34px!important;min-width:230px}
+  #new .compactVatColumn .preparedVatCompact{padding:5px 7px!important;margin:5px 0!important;font-size:11px!important}
+  #new .compactVatColumn .inlineVatMix{padding:5px!important;margin-top:4px!important}
+  #new .compactVatColumn .vatPrepareGrid{grid-template-columns:1.2fr .7fr .7fr!important;gap:4px!important}
+  #new .compactVatColumn .vatPrepareGrid>div:nth-child(4),#new .compactVatColumn .vatPrepareGrid>div:nth-child(5){display:none}
+  #new .compactVatColumn .mixOutlets{max-height:90px;overflow:auto}
+  #new #injectionProgrammingCard{border:0!important;padding:4px 0 0!important;margin:0!important;background:#eef7f0!important;border-radius:6px!important}
+  #new #injectionProgrammingCard .injectionHeadingRow{padding:3px 7px}
+  #new #injectionProgrammingCard .injectionHeadingRow .muted,#new #calculateFertTiming{display:none!important}
+  #new #injectionProgrammingCard h2{font-size:15px!important}
+  #new .currentAquaSummary{font-size:11px!important}
+  #new details.injectionEditDetails{margin:3px 6px 6px!important}
+  #new details.injectionEditDetails>summary{padding:5px 7px!important;font-size:11px!important}
+  #new .compactHiddenMeta{display:none!important}
+  #new .compactJobActions{display:grid!important;grid-template-columns:auto 1fr auto!important;gap:7px!important;align-items:center!important;border:1px solid #d8e1da!important;border-radius:7px!important;padding:6px 8px!important;margin:8px 0!important}
+  #new .compactJobActions>label{grid-column:1!important;margin:0!important;font-size:12px!important;color:#154c31!important}
+  #new .compactJobActions textarea{grid-column:2!important;min-height:36px!important;height:36px!important;padding:7px 9px!important}
+  #new .compactJobActions .btns{grid-column:3!important;margin:0!important;display:flex!important;flex-wrap:nowrap!important}
+  #new .compactJobActions .btns button{height:38px!important;padding:7px 12px!important}
+  #new #savePlan{order:3;font-size:15px}
+  #new #clearForm{order:1}
+  #new .currentNightPanel{border:1px solid #cad9ce!important;border-radius:8px!important;padding:7px 9px!important;margin:0!important;background:#f9fcfa!important}
+  #new .currentNightHead{display:flex!important;flex-direction:row!important;align-items:center!important}
+  #new .currentNightHead h2{font-size:21px!important}
+  #new #saveNightProgramBottom{min-height:38px!important;width:auto!important;padding:8px 14px!important}
+  #new .currentNightProgramList{margin-top:5px!important;display:grid;gap:0}
+  #new .currentNightRow{padding:5px 3px!important;min-height:34px}
+  #new .currentNightRow strong{font-size:12px!important}#new .currentNightRow span{font-size:11px!important}
+}
+
+/* Compact UI glitch fixes — 22 Sep 2026
+   Keep the approved three-column layout, but give the prepared-vat editor
+   more room while it is open and keep all vat status content contained. */
+@media (min-width:1000px){
+  #new .compactWorkbench:has(#vatPreparePanel:not(.hidden)){
+    grid-template-columns:.92fr .72fr 1.36fr;
+  }
+  #new .compactVatColumn .vatStatusDashboard{
+    grid-template-columns:minmax(0,1.15fr) minmax(0,.9fr) auto!important;
+    gap:7px!important;
+    width:100%;
+    max-width:100%;
+  }
+  #new .compactVatColumn .vatStatusDetails,
+  #new .compactVatColumn .vatStillHero,
+  #new .compactVatColumn .vatRemainingHero{min-width:0;max-width:100%}
+  #new .compactVatColumn .vatStillHero{padding:6px 8px}
+  #new .compactVatColumn .vatStillHero strong{font-size:20px;white-space:normal;overflow-wrap:anywhere}
+  #new .compactVatColumn .vatRemainingHero strong{font-size:18px}
+  #new .compactVatColumn #vatPreparePanel:not(.hidden) .mixOutlets{max-height:none!important;overflow:visible!important;grid-template-columns:repeat(5,minmax(0,1fr))!important}
+  #new .compactVatColumn #vatPreparePanel:not(.hidden) .vatPrepareGrid{grid-template-columns:1.35fr .72fr .72fr!important}
+}
+
+#new .currentNightProgramActions{display:flex;align-items:center;gap:7px;flex-wrap:nowrap}
+#new #cancelProgramBottom{min-height:38px!important;padding:8px 12px!important;white-space:nowrap}
+#new .currentNightRowActions{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+#new .currentNightRowActions>.miniFert,#new .currentNightRowActions>.miniWater{margin:0;padding:3px 7px;border-radius:999px;font-size:10px;font-weight:900;white-space:nowrap}
+#new .currentNightRemove{border:1px solid #c7d4ca;background:#fff;color:#7b2e2e;border-radius:5px;min-height:28px;padding:4px 8px;font-size:11px;font-weight:850;cursor:pointer}
+#new .currentNightRemove:hover{background:#fff3f3}
+@media (max-width:800px){
+  #new .currentNightProgramActions{width:100%;display:grid;grid-template-columns:1fr 1fr}
+  #new #cancelProgramBottom,#new #saveNightProgramBottom{width:100%!important}
+}
+
+/* Compact UI Glitch Fix 2 — full-width injector editor on iPad/desktop.
+   Keep the AquaLink summary in the right column; when editing, let the
+   controls use the otherwise-empty width beneath all three work columns. */
+@media (min-width:901px){
+  #new .injectionEditDetails.injectionEditorWide{
+    grid-column:1 / -1;
+    width:100%;
+    margin:0!important;
+    padding:8px 10px 10px!important;
+    border:1px solid #cad9ce;
+    border-radius:8px;
+    background:#f7fbf8;
+    min-width:0;
+  }
+  #new .injectionEditDetails.injectionEditorWide>summary{
+    font-size:14px!important;
+    padding:7px 10px!important;
+  }
+  #new .injectionEditDetails.injectionEditorWide[open]{
+    margin-top:8px!important;
+  }
+  #new .injectionEditDetails.injectionEditorWide[open]>summary{margin-bottom:6px}
+  #new .injectionEditDetails.injectionEditorWide .irrigationModeBar{
+    margin:4px 0 8px;
+    padding:7px 9px;
+  }
+  #new .injectionEditDetails.injectionEditorWide .injectors{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    align-items:start;
+  }
+  #new .injectionEditDetails.injectionEditorWide .inj{
+    min-width:0;
+    padding:9px;
+    border-radius:8px;
+  }
+  #new .injectionEditDetails.injectionEditorWide .injFields{gap:6px}
+  #new .injectionEditDetails.injectionEditorWide .inj h3{font-size:16px}
+  #new .injectionEditDetails.injectionEditorWide .injMeta{font-size:11px;margin-bottom:5px}
+}
+@media (min-width:901px) and (max-width:1180px){
+  #new .injectionEditDetails.injectionEditorWide .injectors{grid-template-columns:1fr}
+}
+
+/* Compact UI Glitch Fix 3 — current-job outlet selector only.
+   Use three compact outlet tiles across on iPad in both orientations.
+   Prepared-vat outlet selectors are intentionally unchanged. */
+#new .compactOutlets .outlets{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:6px!important;
+}
+#new .compactOutlets .outlet{
+  min-height:58px!important;
+  padding:7px 9px!important;
+  gap:9px!important;
+  align-items:center!important;
+  border-radius:7px!important;
+}
+#new .compactOutlets .outlet input{
+  width:26px!important;
+  height:26px!important;
+  min-width:26px!important;
+  margin:0!important;
+}
+#new .compactOutlets .outlet strong,
+#new .compactOutlets .outlet>span:first-of-type{
+  font-size:19px!important;
+  line-height:1!important;
+  font-weight:900!important;
+}
+#new .compactOutlets .outlet small{
+  font-size:14px!important;
+  line-height:1.05!important;
+  margin-top:3px!important;
+  font-weight:800!important;
+}
+@media (min-width:901px){
+  #new .compactOutlets #areaSummary{margin-top:18px!important;}
+}
+@media (max-width:900px){
+  #new .compactOutlets .outlets{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  #new .compactOutlets .outlet{
+    min-height:56px!important;
+    padding:6px 8px!important;
+  }
+  #new .compactOutlets #areaSummary{margin-top:8px!important;}
+}
+@media (max-width:480px){
+  #new .compactOutlets .outlets{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+/* Glitch Fix 4: compact Notes-style AquaLink programming report */
+.aquaJobCompact{padding:10px 12px;margin:8px 0;border-radius:12px}
+.aquaCompactHead{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:16px;padding:2px 2px 9px;border-bottom:1px solid var(--line);align-items:start}
+.aquaCompactHead>div:first-child>strong{font-size:17px;color:#1f2d25}
+.aquaCompactMeta{display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.35}
+.aquaCompactTable{margin-top:4px}
+.aquaCompactLabels,.aquaCompactRow{display:grid;grid-template-columns:minmax(250px,1.6fr) minmax(90px,.45fr) minmax(90px,.45fr) minmax(190px,1fr);column-gap:18px;align-items:start}
+.aquaCompactLabels{padding:7px 8px 5px;font-size:12px;font-weight:900;color:var(--g);background:#f7faf7;border-bottom:1px solid var(--line)}
+.aquaCompactRow{padding:7px 8px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.25}
+.aquaCompactRow:last-child{border-bottom:0}
+.aquaCompactInjector{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.aquaCompactNumber{font-size:18px;font-weight:900;color:var(--g)}
+.aquaCompactNumber small{display:block;font-size:11px;line-height:1.15;color:var(--muted);font-weight:800;white-space:nowrap}
+.aquaCompactProduct{font-size:13px;color:#38473e}
+.aquaCompactEmpty{padding:10px 8px}
+@media(max-width:760px){
+  .aquaCompactHead{grid-template-columns:1fr;gap:4px}
+  .aquaCompactLabels,.aquaCompactRow{grid-template-columns:minmax(150px,1.35fr) 72px 72px minmax(130px,1fr);column-gap:10px}
+}
+
+
+/* Glitch Fix 5 — restore landscape start time and make prepared-vat restrictions explicit. */
+@media (min-width:901px){
+  #new .compactTiming .compactTimePicker{
+    display:grid!important;grid-template-columns:.82fr .82fr 1.3fr .82fr .82fr!important;
+    gap:5px!important;height:auto!important;border:0!important;padding:0!important;background:transparent!important;margin:2px 0 9px!important;
+  }
+  #new .compactTiming .compactTimePicker button{display:flex!important;min-width:0!important;height:42px!important;padding:4px 5px!important;align-items:center;justify-content:center}
+  #new .compactTiming .compactTimePicker #useSuggested{display:flex!important;grid-column:auto!important;height:42px!important}
+  #new .compactTiming .compactTimePicker .timeDisplay{font-size:15px!important}
+  #new .compactTiming .compactTimePicker .timeHint{font-size:9px!important}
+}
+#new .outlet.vatUnavailable{opacity:.55;background:#f1f3f1!important;border-style:dashed!important;cursor:not-allowed}
+#new .outlet.vatUnavailable input{cursor:not-allowed}
+#new .vatChoiceReason{display:block!important;color:#7a5b31!important;font-size:9px!important;line-height:1.05!important;margin-top:3px!important;font-weight:800!important}
+
+/* Glitch Fix 6 — AquaLink-entry layout, modelled on the real Injector screen. */
+#programBody .aquaLinkEntry{padding:0;margin:7px 0 10px;border-radius:8px;overflow:hidden;background:#fff}
+#programBody .aquaJobTitle{display:flex;align-items:baseline;gap:10px;padding:8px 10px 4px;background:#fff}
+#programBody .aquaJobTitle strong{font-size:17px;color:#1f2d25}
+#programBody .aquaJobTitle span{font-size:12px;color:var(--muted)}
+#programBody .aquaJobStrip{display:flex;align-items:center;flex-wrap:wrap;gap:5px 18px;padding:2px 10px 7px;border-bottom:1px solid var(--line);font-size:12px;line-height:1.25;color:#38473e}
+#programBody .aquaJobStrip span{white-space:nowrap}
+#programBody .aquaJobStrip .aquaPump{white-space:normal}
+#programBody .aquaJobStrip b{color:#1f2d25;margin-right:3px}
+#programBody .aquaCompactTable{margin:0}
+#programBody .aquaCompactLabels,#programBody .aquaCompactRow{grid-template-columns:minmax(250px,1.55fr) 105px 105px minmax(220px,1fr);column-gap:12px}
+#programBody .aquaCompactLabels{padding:6px 10px 5px;background:#f2f5f2;font-size:12px}
+#programBody .aquaCompactRow{padding:6px 10px;font-size:14px;min-height:31px;align-items:center}
+#programBody .aquaCompactNumber{font-size:18px;line-height:1.05}
+#programBody .aquaCompactProduct{font-size:13px}
+#programBody .aquaCompactInjector{gap:6px}
+#programBody .vatRinseTag{font-size:10px}
+@media(max-width:760px){
+ #programBody .aquaJobStrip{gap:4px 10px}
+ #programBody .aquaCompactLabels,#programBody .aquaCompactRow{grid-template-columns:minmax(145px,1.35fr) 68px 68px minmax(125px,1fr);column-gap:8px;padding-left:7px;padding-right:7px}
+}
+
+/* Compact UI pass 7: vat builder + outlet action */
+.areaActionRow{display:flex;align-items:stretch;gap:8px}
+.areaActionRow #areaSummary{flex:1;margin:0!important}
+.areaActionRow #savePlanNearOutlets{white-space:nowrap;min-width:180px}
+#tonight .vatBuilderHead+.vatGrid{margin-top:8px}
+#tonight .vatJobs+ .vatCalc{margin-top:8px}
+#tonight .vatJob small{margin-top:0}
+#tonight .vatJob input{margin-top:0}
+@media(max-width:900px){.vatGrid{grid-template-columns:repeat(2,1fr)}.vatJobs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.vatGrid{grid-template-columns:1fr}.vatJobs{grid-template-columns:1fr}.areaActionRow{flex-direction:column}.areaActionRow #savePlanNearOutlets{width:100%}}
+/* Build 13 — compact, filterable irrigation history */
+.historyFilterBar{display:grid;grid-template-columns:1.1fr 1.15fr 1fr 1fr 1.15fr 1.1fr;gap:10px;align-items:end;margin:12px 0}.historyFilterBar label,.historyCustomDates label{display:block;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:4px}.historyFilterBar select,.historyFilterBar details>summary,.historyCustomDates input{width:100%;min-height:44px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:10px 12px;font:inherit;color:#222;box-sizing:border-box}.historyFilterBar details{position:relative}.historyFilterBar details>summary{list-style:none;cursor:pointer}.historyFilterBar details>summary::-webkit-details-marker{display:none}.historyOutletChoices{position:absolute;z-index:30;top:48px;left:0;min-width:260px;max-height:330px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.14)}.historyOutletChoices label{display:flex;align-items:center;gap:9px;padding:8px;border-bottom:1px solid #edf0ed;font-size:15px;color:var(--g)}.historyOutletChoices input{width:22px;height:22px}.historyOutletTools{display:flex;gap:7px;margin-bottom:6px}.historyCustomDates{display:flex;gap:10px;margin:-2px 0 10px}.historyCustomDates>div{width:190px}.historyActionRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0}.compactHistory table{min-width:820px}.compactHistory th,.compactHistory td{padding:10px 9px;vertical-align:middle}.historyMainRow:hover{background:#f7faf7}.historyDetailRow td{padding:0 8px 12px!important;border-bottom:1px solid var(--line)}.historyDetailCard{background:#f4f8f4;border:1px solid var(--line);border-radius:12px;padding:12px}.historyDetailGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}.historyDetailGrid div{display:flex;flex-direction:column;gap:3px}.historyDetailGrid b{font-size:12px;color:var(--g)}.historyDetailInjectors{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}.historyDetailInjectors>div{display:grid;grid-template-columns:1.3fr 1.5fr .8fr 1fr 1fr;gap:8px;padding:9px;border-bottom:1px solid var(--line);align-items:center}.historyDetailInjectors>div:last-child{border-bottom:0}.historyDetailInjectors strong{color:var(--g)}
+@media(max-width:1050px){.historyFilterBar{grid-template-columns:repeat(3,1fr)}.historyDetailGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.historyFilterBar{grid-template-columns:1fr 1fr}.historyActionRow{align-items:flex-start;flex-direction:column}.historyDetailInjectors>div{grid-template-columns:1fr 1fr}.historyDetailGrid{grid-template-columns:1fr 1fr}}
