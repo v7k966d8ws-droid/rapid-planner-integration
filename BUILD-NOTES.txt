@@ -1,2 +1,8 @@
-Rapid Planner Integration Build 3.7 (redone from user-provided working 3.6)
-UI-only change: keeps Setup and Products & Injectors as separate controls, with Products & Injectors moved into the navigation row so both fit without overlap. Planner logic unchanged.
+Rapid Planner Integration — Build 3.5
+27 September 2026
+
+UI-only change:
+- Tonight's Program job cards are substantially more compact on iPad/laptop.
+- Reduced job-card padding, header spacing, injection table row height, typography and action-button size.
+- Water-only jobs remain especially compact because they have no injection table.
+- No changes to Rapid Planner calculations, shift logic, save integration, sequencing, history logic or injector calculations.

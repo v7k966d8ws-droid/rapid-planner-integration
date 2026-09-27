@@ -116,10 +116,3 @@
 /* Integration Build 3.4 — embedded planner uses the parent app header */
 header{display:none!important}
 main{padding-top:8px}
-
-
-/* Integration Build 3.6 — setup is opened from the parent app header */
-.setupCard{display:none}
-.setupCard.externalOpen{display:block;margin-bottom:10px}
-.setupCard.externalOpen .setupToggle{display:none}
-.setupCard.externalOpen .setupPanel{display:block;border-top:0}
