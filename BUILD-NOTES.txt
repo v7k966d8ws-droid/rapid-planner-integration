@@ -1,3 +1,9 @@
+Integration Build 3.7
+- Removed the duplicate Rapid Planner Products & Injectors header control.
+- Kept the main app Setup tab as the single setup location.
+- Rapid Planner now reads product names/application method/units and injector names/flow rates from the main app Setup data.
+- Planner-specific nightly rates, prepared volumes, preflow and rinse values remain available in Injection Programming.
+
 Rapid Planner Integration — Build 3.6
 
 - Removed the full-width Setup bar from the normal Rapid Planner layout.
