@@ -1,6 +1,6 @@
-Rapid Planner Integration Build 3
-- Removed separate water-only section.
-- Each shift now has an Irrigation only checkbox.
-- Water-only shifts skip injector/fertilizer calculations.
-- Fertigation vat/product totals exclude water-only shifts.
-- Finish & Save preserves shift order in Tonight's Program.
+Rapid Planner Integration Build 3.1
+
+- Water-only outlets remain selectable in later fertigation shifts.
+- Outlets already assigned to another fertigation shift remain protected from duplicate fertigation assignment.
+- Shift tiles now show outlet numbers, WATER ONLY/FERTIGATION, irrigation runtime, and hectares.
+- Water-only and fertigation shifts continue to save in sequence to Tonight's Program.
