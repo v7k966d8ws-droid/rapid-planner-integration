@@ -1,6 +1,10 @@
-Rapid Planner Integration Build 3.1
+Rapid Planner Integration — Build 3.3
+27 Sep 2026
 
-- Water-only outlets remain selectable in later fertigation shifts.
-- Outlets already assigned to another fertigation shift remain protected from duplicate fertigation assignment.
-- Shift tiles now show outlet numbers, WATER ONLY/FERTIGATION, irrigation runtime, and hectares.
-- Water-only and fertigation shifts continue to save in sequence to Tonight's Program.
+UI-only workflow pass based on Build 3.2:
+- Injection Programming uses three compact injector columns on iPad/laptop.
+- Phone layout remains stacked/responsive.
+- Finish & Save Tonight's Program moved directly under the shift/runtime controls.
+- Night date and first-job start remain beside the save action in compact form.
+- Clear shifts moved beside the shift selector and renamed Clear all.
+- Build 3.2 save integration and Build 3.1 shift/calculation logic preserved.
