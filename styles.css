@@ -1229,26 +1229,9 @@
 @media(max-width:900px){#planCards .planTop{grid-template-columns:95px minmax(220px,1fr) minmax(120px,.65fr) minmax(105px,.55fr)}}
 @media(max-width:700px){#planCards .planTop{grid-template-columns:90px 1fr}#planCards .planInjectTable{min-width:540px}}
 
-
-/* Integration Build 3.6 — top-right Products & Injectors control */
-.headerTools{position:absolute;right:10px;top:8px;display:flex;align-items:center;gap:8px;z-index:3}
-.headerTools .headerBuildBadge{position:static!important}
-.productsInjectorsBtn{border:1px solid #b8c9bd;border-radius:9px;background:#fff;color:#244b35;padding:7px 11px;font-size:12px;font-weight:850;white-space:nowrap}
-.productsInjectorsBtn.active{background:#244b35;color:#fff}
-@media(min-width:760px){.hero{padding-right:285px!important}}
-@media(max-width:759px){.headerTools{right:8px;top:7px;gap:5px}.productsInjectorsBtn{padding:6px 8px;font-size:11px}.headerTools .headerBuildBadge{padding:6px 7px;font-size:11px}.hero{padding-right:250px!important}}
-@media(max-width:520px){.headerTools .headerBuildBadge{display:none}.hero{padding-right:165px!important}.productsInjectorsBtn{font-size:10px}}
-
-
-/* Integration Build 3.7 — preserve Build 3.6 planner; fit both Setup controls cleanly. */
-@media (min-width:901px){
-  .tabs{grid-template-columns:repeat(6,minmax(120px,1fr))!important;max-width:950px!important}
-  .tabs .navToolBtn{display:flex;align-items:center;justify-content:center;border:0;border-radius:6px;padding:10px 8px;background:#dfe9e1;color:var(--g);font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap}
-  .tabs .navToolBtn.active{background:var(--g);color:#fff}
-  .hero{padding-right:95px!important}
-  .headerTools{right:10px;top:8px}
-}
-@media (max-width:900px){
-  .tabs .navToolBtn{display:flex;align-items:center;justify-content:center;border:0;border-radius:12px;padding:12px 8px;background:#dfe9e1;color:var(--g);font-weight:900;font-size:15px;cursor:pointer}
-  .tabs .navToolBtn.active{background:var(--g);color:#fff}
-}
+/* Integration Build 3.7 — keep Setup and Products & Injectors as separate nav controls. */
+.tabs{grid-template-columns:repeat(6,minmax(0,1fr))!important;max-width:920px!important}
+.tabs .productsInjectorsBtn{border:0;border-radius:12px;padding:12px 8px;background:#dfe9e1;color:#244b35;font-weight:900;font-size:15px;white-space:nowrap}
+.tabs .productsInjectorsBtn.active{background:#244b35;color:#fff}
+@media(max-width:760px){.tabs{grid-template-columns:repeat(3,minmax(0,1fr))!important;transform:none!important;margin:0 0 8px!important}.tabs .productsInjectorsBtn{font-size:13px;padding:10px 6px}}
+@media(max-width:520px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important}}

@@ -1,6 +1,2 @@
-Rapid Planner Integration — Build 3.7 (redone from working Build 3.6)
-
-- Based directly on working Build 3.6; planner rendering and calculations are unchanged.
-- Keeps both Setup and Products & Injectors controls.
-- Moves Products & Injectors into the main navigation beside Setup so the controls no longer overlap.
-- Keeps Build 3.7 badge at the far top-right.
+Rapid Planner Integration Build 3.7 (redone from user-provided working 3.6)
+UI-only change: keeps Setup and Products & Injectors as separate controls, with Products & Injectors moved into the navigation row so both fit without overlap. Planner logic unchanged.
