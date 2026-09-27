@@ -1,16 +1,6 @@
-Rapid Planner Integration - Build 2
-27 September 2026
-
-Base: Full Stable September 2026 + Rapid Planner Integration Build 1.
-
-Added:
-- Optional water-only irrigation job before fertigation.
-- Multiple outlet selection for the water-only job.
-- Editable water-only runtime.
-- Night date and first-job start time.
-- Finish & Save Tonight's Program.
-- Saves water-only job first, then populated fertigation shifts in sequence into the full app's existing local storage plan list.
-
-Stable Rapid Planner calculation flow remains in place.
-
-Build 2.1: corrected quick.js syntax so Rapid Planner initializes correctly on fresh GitHub Pages deployment.
+Rapid Planner Integration Build 3
+- Removed separate water-only section.
+- Each shift now has an Irrigation only checkbox.
+- Water-only shifts skip injector/fertilizer calculations.
+- Fertigation vat/product totals exclude water-only shifts.
+- Finish & Save preserves shift order in Tonight's Program.
