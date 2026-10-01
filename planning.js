@@ -377,7 +377,16 @@ function saveNightProgram(){
  if(coverage.vat&&coverage.missing.length){alert(`The prepared vat cannot be finished yet.\n\n${coverage.vat.batchName} was prepared for: ${coverage.vat.outlets.join(", ")}\nStill not allocated to a fertigation job: ${coverage.missing.join(", ")}\n\nAdd those outlet(s) to the fertigation program so the planned vat balance finishes at 0 L.`);return}
  applyFinalVatRinseToDraftJobs();
  if(!confirm(`Save ${a.name} to Tonight's Program?\n\n${jobs.length} job${jobs.length===1?"":"s"} will be saved together.`))return;
- jobs.forEach((s,i)=>state.plans.push({...s,id:uid(),programId:a.id,programName:a.name,programSequence:i+1,created:new Date().toISOString()}));
+ // Save this night program as one authoritative set. If the same program is
+ // saved again after editing its shifts, replace its existing jobs instead of
+ // appending a second copy of every job to Tonight's Program.
+ const existingProgramJobs=state.plans.filter(p=>p.programId===a.id);
+ const existingBySequence=new Map(existingProgramJobs.map(p=>[Number(p.programSequence)||0,p]));
+ state.plans=state.plans.filter(p=>p.programId!==a.id);
+ jobs.forEach((s,i)=>{
+   const seq=i+1,old=existingBySequence.get(seq);
+   state.plans.push({...s,id:old?.id||uid(),programId:a.id,programName:a.name,programSequence:seq,created:old?.created||new Date().toISOString(),updated:old?new Date().toISOString():s.updated});
+ });
  const fert=[...jobs].reverse().find(s=>s.phaseMode==="fertigation"&&hasProductInjection(s.injectors));if(fert){const mem=copyInjectionSetup(fert.injectors);mem.forEach(x=>{if(x&&x.type==="product"&&x.batchName&&(x.batchMode==="new"||x.batchMode==="continue")){x.batchMode="continue";x.batchStartAmount=0}});state.fertigationMemory[a.farm]=mem}
  const date=a.nightDate;
  if(state.activeVatMix&&state.activeVatMix[a.farm])delete state.activeVatMix[a.farm];
