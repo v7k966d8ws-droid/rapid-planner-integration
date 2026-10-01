@@ -1,0 +1,2 @@
+MULTI-NIGHT VAT TEST 4
+Fix: outlets used for water-only remain selectable for fertigation. Multi-night completion is now tracked by night date, so saving/editing the same night does not lock its outlets; prior-night completed outlets remain blocked. Legacy flat completion state is reset once on upgrade.
