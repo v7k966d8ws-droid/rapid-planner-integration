@@ -1,0 +1,3 @@
+MULTI-NIGHT VAT TEST 2
+This build must show a large MULTI-NIGHT VAT TEST 2 badge at the top of quick-planner.html.
+In Injection programming it must show Prepared vat use — TEST 2 with Tonight only / Multi-night vat.
