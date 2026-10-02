@@ -16,6 +16,8 @@ function currentPhaseMode(){return $("shiftMode")?.value||"water"}
 function vatMemoryKey(farm,product){return `${farm||""}|${product||""}`}
 function storedPreparedVatForFarm(farm){return state.activeVatMix?.[farm]||null}
 function preparedVatForFarm(farm){const v=storedPreparedVatForFarm(farm);return v&&v.completed!==true?v:null}
+function committedVatOutlets(v){return new Set(Array.isArray(v?.completedOutlets)?v.completedOutlets:[])}
+function committedVatLitres(v){const done=committedVatOutlets(v);return (v?.allocations||[]).reduce((sum,a)=>sum+(done.has(a.outlet)?Number(a.solutionL||0):0),0)}
 function preparedVatSeedInjectors(farm){
  const v=preparedVatForFarm(farm),items=rememberedInjectors(farm);
  if(!v)return items;
@@ -41,12 +43,12 @@ function syncPreparedVatStatus(){
  const box=$("preparedVatStatus");if(!box)return;
  const farm=$("farm")?.value||"",v=preparedVatForFarm(farm);
  if(!v){box.innerHTML="<strong>No vat prepared yet.</strong><br><span class='muted'>If a mixed vat is required, choose Yes and prepare it before building the jobs.</span>";return}
- const used=new Set();
+ const used=committedVatOutlets(v);
  (draftShifts()||[]).filter(j=>j.phaseMode==="fertigation").forEach(j=>(j.outlets||[]).forEach(o=>{if((v.outlets||[]).includes(o))used.add(o)}));
  const usedArea=[...used].reduce((s,o)=>s+(Number(FARMS[farm]?.[o])||0),0);
  const remainingArea=Math.max(0,(Number(v.totalArea)||0)-usedArea);
  const remainingL=(Number(v.totalArea)||0)>0?(Number(v.volume)||0)*(remainingArea/Number(v.totalArea)):0;
- const prepared=(v.outlets||[]),fertigated=prepared.filter(o=>used.has(o));
+ const prepared=(v.outlets||[]),fertigated=prepared.filter(o=>used.has(o)),useMode=v.multiNightVat===true?"Multi-night vat":"Tonight only";
  // While building a fertigation job, reflect the current checked outlets immediately
  // in the yellow "Still to fertigate" indicator. Draft jobs remain the committed source
  // for vat litres/area calculations until the job is actually added.
@@ -54,7 +56,7 @@ function syncPreparedVatStatus(){
  const still=prepared.filter(o=>!used.has(o));
  const stillMarkup=still.map(o=>`<span class="vatStillOutlet${chosenNow.has(o)?" selectedNow":""}">${esc(o)}</span>`).join(`<span class="vatStillSep">, </span>`);
  const done=remainingL<0.05;
- box.innerHTML=`<div class="vatStatusDashboard"><div class="vatStatusDetails"><div class="vatStatusTitle"><strong>${esc(v.batchName)}${done?" — COMPLETE":""}</strong></div><div class="vatStatusLine">${esc(v.product)} · ${Number(v.volume||0).toLocaleString("en-AU")} L · ${Number(v.rate)} ${esc(v.unit||productMetaFor(v.product).unit)} · ${Number(v.totalAmount??v.totalKg).toFixed(1)} ${(v.unit||productMetaFor(v.product).unit)==="L/ha"?"L":"kg"} allocated${(v.unit||productMetaFor(v.product).unit)==="kg/ha"&&Number(v.actualMixedKg)>Number(v.totalKg)?` · ${Number(v.actualMixedKg).toFixed(1)} kg mixed`:""} · ${esc(state.injectorConfig?.[farm]?.[Number(v.injectorIndex)||0]?.name||`Injector ${(Number(v.injectorIndex)||0)+1}`)}</div><div class="vatStatusLine"><span class="vatLabel">Prepared for:</span> <strong>${prepared.map(esc).join(", ")}</strong></div>${fertigated.length?`<div class="vatStatusLine vatDone"><span class="vatLabel">✓ Fertigated:</span> <strong>${fertigated.map(esc).join(", ")}</strong></div>`:""}<button type="button" id="toggleVatPrepareDetails" class="vatDetailsToggle secondary">${vatPrepareExpanded?"Hide vat details":"Show / edit vat details"}</button></div><div class="vatStillHero ${done?"complete":""}"><span>${done?"VAT COMPLETE":"STILL TO FERTIGATE"}</span><strong>${done?"✓":stillMarkup}</strong></div><div class="vatRemainingHero"><strong>${Number(remainingL.toFixed(1)).toLocaleString("en-AU")} L</strong><span>remaining</span></div></div>`;
+ box.innerHTML=`<div class="vatStatusDashboard"><div class="vatStatusDetails"><div class="vatStatusTitle"><strong>${esc(v.batchName)}${done?" — COMPLETE":""}</strong></div><div class="vatStatusLine"><strong>${useMode}</strong> · ${esc(v.product)} · ${Number(v.volume||0).toLocaleString("en-AU")} L · ${Number(v.rate)} ${esc(v.unit||productMetaFor(v.product).unit)} · ${Number(v.totalAmount??v.totalKg).toFixed(1)} ${(v.unit||productMetaFor(v.product).unit)==="L/ha"?"L":"kg"} allocated${(v.unit||productMetaFor(v.product).unit)==="kg/ha"&&Number(v.actualMixedKg)>Number(v.totalKg)?` · ${Number(v.actualMixedKg).toFixed(1)} kg mixed`:""} · ${esc(state.injectorConfig?.[farm]?.[Number(v.injectorIndex)||0]?.name||`Injector ${(Number(v.injectorIndex)||0)+1}`)}</div><div class="vatStatusLine"><span class="vatLabel">Prepared for:</span> <strong>${prepared.map(esc).join(", ")}</strong></div>${fertigated.length?`<div class="vatStatusLine vatDone"><span class="vatLabel">✓ Fertigated:</span> <strong>${fertigated.map(esc).join(", ")}</strong></div>`:""}<button type="button" id="toggleVatPrepareDetails" class="vatDetailsToggle secondary">${vatPrepareExpanded?"Hide vat details":"Show / edit vat details"}</button></div><div class="vatStillHero ${done?"complete":""}"><span>${done?"VAT COMPLETE":"STILL TO FERTIGATE"}</span><strong>${done?"✓":stillMarkup}</strong></div><div class="vatRemainingHero"><strong>${Number(remainingL.toFixed(1)).toLocaleString("en-AU")} L</strong><span>remaining</span></div></div>`;
 }
 
 function syncPreparedVatOutletChoices(){
@@ -64,7 +66,7 @@ function syncPreparedVatOutletChoices(){
  box.querySelectorAll("label.outlet").forEach(l=>{l.classList.remove("vatUnavailable","vatChosenNow");l.style.display=""});
  if(currentPhaseMode()!=="fertigation")return;
  const farm=$("farm")?.value||"",v=preparedVatForFarm(farm);if(!v)return;
- const prepared=new Set(v.outlets||[]),already=new Set();
+ const prepared=new Set(v.outlets||[]),already=committedVatOutlets(v);
  draftShifts().filter(j=>j.phaseMode==="fertigation").forEach(j=>(j.outlets||[]).forEach(o=>{if(prepared.has(o))already.add(o)}));
  box.classList.add("preparedVatLiveChoices");
  box.querySelectorAll("label.outlet").forEach(l=>{
@@ -100,13 +102,14 @@ function prepareVatMix(){
  if(!activeProgram()){const farm=d.farm,nightDate=$("nightDate").value||today(),name=$("programName").value.trim()||defaultProgramName(farm,nightDate);state.activeProgram={id:uid(),name,farm,nightDate,draftShifts:[],created:new Date().toISOString()};editingDraftShiftIndex=-1;save();renderProgramBanner()}
  if(!batch){alert("Enter a vat name.");return}
  const unit=productMetaFor(product).unit,alloc=d.outs.map(o=>{const ha=Number(FARMS[d.farm]?.[o])||0,amount=Number((ha*d.rate).toFixed(4));return{outlet:o,ha,productAmount:amount,productKg:unit==="kg/ha"?amount:0,productL:unit==="L/ha"?amount:0,solutionL:Number((d.totalArea>0?d.volume*ha/d.totalArea:0).toFixed(4)),rateUnit:unit,rateKgHa:unit==="kg/ha"?d.rate:0}}),mix=unit==="kg/ha"?bagMixInfo(product,d.totalAmount):{bagSize:0,bags:0,actualKg:d.totalAmount,roundingKg:0};
- state.activeVatMix[d.farm]={id:uid(),farm:d.farm,product,rate:d.rate,volume:d.volume,batchName:batch,injectorIndex:idx,outlets:[...d.outs],totalArea:d.totalArea,totalKg:d.totalAmount,totalAmount:d.totalAmount,unit,actualMixedKg:unit==="kg/ha"?mix.actualKg:0,bagSize:mix.bagSize,bagCount:mix.bags,bagRoundingKg:mix.roundingKg,allocations:alloc,preparedAt:new Date().toISOString(),oneSessionVat:true};
+ const multiNightVat=$("mixVatUse")?.value==="multi";
+ state.activeVatMix[d.farm]={id:uid(),farm:d.farm,product,rate:d.rate,volume:d.volume,batchName:batch,injectorIndex:idx,outlets:[...d.outs],totalArea:d.totalArea,totalKg:d.totalAmount,totalAmount:d.totalAmount,unit,actualMixedKg:unit==="kg/ha"?mix.actualKg:0,bagSize:mix.bagSize,bagCount:mix.bags,bagRoundingKg:mix.roundingKg,allocations:alloc,preparedAt:new Date().toISOString(),completedOutlets:[],multiNightVat};
  rememberVatRate(d.farm,product,d.rate,d.volume,idx);
  save();
  vatPrepareExpanded=false;
  syncVatRequirementUI();
  applyPreparedVatToCurrentJob(true);
- alert(`Vat prepared in V2.\n\n${batch}\n${d.totalArea.toFixed(2)} ha\n${d.totalAmount.toFixed(1)} ${unit==="L/ha"?"L":"kg"} calculated requirement${mix.bagSize>0?`\n${mix.bags} × ${mix.bagSize.toFixed(1)} kg bags = ${mix.actualKg.toFixed(1)} kg actually mixed`:""}\n${d.volume.toFixed(0)} L prepared solution\n\nNow build the fertigation jobs normally. V2 will allocate this vat automatically by hectares and expects 0 L remaining after all selected outlets are completed.`);
+ alert(`Vat prepared in V2.\n\n${batch}\n${d.totalArea.toFixed(2)} ha\n${d.totalAmount.toFixed(1)} ${unit==="L/ha"?"L":"kg"} calculated requirement${mix.bagSize>0?`\n${mix.bags} × ${mix.bagSize.toFixed(1)} kg bags = ${mix.actualKg.toFixed(1)} kg actually mixed`:""}\n${d.volume.toFixed(0)} L prepared solution\n\nNow build the fertigation jobs normally. ${multiNightVat?"This vat will stay active across multiple nights and allocate automatically by hectares until all selected outlets are completed.":"This vat is for tonight only and must be completed in this Night Program."}`);
 }
 function applyPreparedVatToCurrentJob(silent=true){
  // While editing an existing job, respect the saved/manual injector choices.
@@ -134,7 +137,7 @@ function applyPreparedVatToCurrentJob(silent=true){
      card.dataset.vatBuilder="1";card.dataset.vatAllocations="[]";
      if(type)type.dispatchEvent(new Event("change",{bubbles:true}));
      // The type change updates field visibility; reassert the prepared-vat marker
-     // and hide controls that are automatic for a one-session prepared vat.
+     // and hide controls that are automatic for a prepared vat.
      card.dataset.vatBuilder="1";card.dataset.vatAllocations="[]";
      const modeWrap=mode?.parentElement;if(modeWrap)modeWrap.style.display="none";
      const startWrap=card.querySelector(".batchStartField");if(startWrap)startWrap.style.display="none";
@@ -153,7 +156,7 @@ function applyPreparedVatToCurrentJob(silent=true){
      other.querySelector(".itype").dispatchEvent(new Event("change",{bubbles:true}));
    }
  });
- const earlierVatUse=draftShifts().reduce((sum,p)=>sum+(p.injectors||[]).reduce((inner,x)=>inner+(x&&x.type==="product"&&x.name===v.product&&x.batchName===v.batchName?Number(x.solutionVolume||0):0),0),0);
+ const earlierVatUse=committedVatLitres(v)+draftShifts().reduce((sum,p)=>sum+(p.injectors||[]).reduce((inner,x)=>inner+(x&&x.type==="product"&&x.name===v.product&&x.batchName===v.batchName?Number(x.solutionVolume||0):0),0),0);
  const prior=earlierVatUse>0;
  const jobAlloc=(v.allocations||[]).filter(a=>current.includes(a.outlet));
  card.dataset.vatBuilder="1";card.dataset.vatAllocations=JSON.stringify(jobAlloc);
@@ -168,7 +171,7 @@ function applyPreparedVatToCurrentJob(silent=true){
 }
 function preparedVatCoverage(){
  const farm=$("farm")?.value||activeProgram()?.farm||"",v=storedPreparedVatForFarm(farm);if(!v)return{vat:null,missing:[],used:[]};
- const used=new Set();draftShifts().filter(j=>j.phaseMode==="fertigation").forEach(j=>(j.outlets||[]).forEach(o=>{if((v.outlets||[]).includes(o))used.add(o)}));
+ const used=committedVatOutlets(v);draftShifts().filter(j=>j.phaseMode==="fertigation").forEach(j=>(j.outlets||[]).forEach(o=>{if((v.outlets||[]).includes(o))used.add(o)}));
  return{vat:v,missing:(v.outlets||[]).filter(o=>!used.has(o)),used:[...used]}
 }
 function preparedVatIsComplete(farm){
@@ -293,8 +296,7 @@ function renderProgramBanner(){
 function startIrrigationProgram(){
  const existing=activeProgram();if(existing&&!confirm(`A program is already being built: ${existing.name}. Discard its unsaved draft jobs and start again?`))return;
  const farm=$("farm").value,nightDate=$("nightDate").value||today(),name=$("programName").value.trim()||defaultProgramName(farm,nightDate);
- // A genuinely new program must never inherit a prepared vat from an earlier or abandoned program.
- if(state.activeVatMix&&state.activeVatMix[farm])delete state.activeVatMix[farm];
+ // A prepared vat is physical farm inventory and may intentionally carry across multiple nights.
  state.activeProgram={id:uid(),name,farm,nightDate,draftShifts:[],created:new Date().toISOString()};editingDraftShiftIndex=-1;save();prepareNextShiftForm();renderProgramBanner();
  alert(`${name} started.\n\nBuild Job 1, then tap Add Job to Program. Nothing is added to Tonight's Program until you finish and save the whole program.`)
 }
@@ -303,7 +305,6 @@ function cancelIrrigationProgram(){
  if(!a){alert("There is no unsaved Night Program to cancel.");return}
  const count=draftShifts().length;
  if(!confirm(`Cancel ${a.name}?\n\n${count?`${count} unsaved draft job${count===1?"":"s"} will be discarded.`:"The current unsaved program will be discarded."}\nSaved Tonight's Programs and History will not be changed.`))return;
- if(state.activeVatMix&&state.activeVatMix[a.farm])delete state.activeVatMix[a.farm];
  state.activeProgram=null;editingDraftShiftIndex=-1;$("farm").disabled=false;save();resetNewForm();renderProgramBanner();
  alert("Unsaved Night Program cancelled.")
 }
@@ -374,7 +375,10 @@ function saveNightProgram(){
  const a=activeProgram();if(!a){alert("Start a Night Program first.");return}
  const jobs=draftShifts();if(!jobs.length){alert("Add at least one job before saving the night plan.");return}
  const coverage=preparedVatCoverage();
- if(coverage.vat&&coverage.missing.length){alert(`The prepared vat cannot be finished yet.\n\n${coverage.vat.batchName} was prepared for: ${coverage.vat.outlets.join(", ")}\nStill not allocated to a fertigation job: ${coverage.missing.join(", ")}\n\nAdd those outlet(s) to the fertigation program so the planned vat balance finishes at 0 L.`);return}
+ const saveVat=storedPreparedVatForFarm(a.farm);
+ if(saveVat&&saveVat.multiNightVat!==true&&coverage.missing.length){alert(`This prepared vat is set to Tonight only.\n\nStill to fertigate: ${coverage.missing.join(", ")}\n\nAdd those outlets to tonight\'s program, or edit/re-prepare the vat as Multi-night.`);return}
+ // Multi-night vats may save only part of the prepared vat. Final rinse is
+ // added only when this night's jobs complete the last remaining vat outlets.
  applyFinalVatRinseToDraftJobs();
  if(!confirm(`Save ${a.name} to Tonight's Program?\n\n${jobs.length} job${jobs.length===1?"":"s"} will be saved together.`))return;
  // Save this night program as one authoritative set. If the same program is
@@ -389,7 +393,19 @@ function saveNightProgram(){
  });
  const fert=[...jobs].reverse().find(s=>s.phaseMode==="fertigation"&&hasProductInjection(s.injectors));if(fert){const mem=copyInjectionSetup(fert.injectors);mem.forEach(x=>{if(x&&x.type==="product"&&x.batchName&&(x.batchMode==="new"||x.batchMode==="continue")){x.batchMode="continue";x.batchStartAmount=0}});state.fertigationMemory[a.farm]=mem}
  const date=a.nightDate;
- if(state.activeVatMix&&state.activeVatMix[a.farm])delete state.activeVatMix[a.farm];
+ // Commit this night's prepared-vat outlets to the physical vat before closing
+ // the Night Program. The vat itself stays active for following nights until empty.
+ const liveVat=storedPreparedVatForFarm(a.farm);
+ if(liveVat){
+   const committed=committedVatOutlets(liveVat);
+   jobs.filter(j=>j.phaseMode==="fertigation").forEach(j=>(j.outlets||[]).forEach(o=>{if((liveVat.outlets||[]).includes(o))committed.add(o)}));
+   liveVat.completedOutlets=[...committed];
+   liveVat.lastUsedAt=new Date().toISOString();
+   liveVat.completed=(liveVat.outlets||[]).every(o=>committed.has(o));
+   if(liveVat.completed)liveVat.completedAt=new Date().toISOString();
+   // Tonight-only vats end with this Night Program. Multi-night vats remain physical inventory until completed.
+   if(liveVat.multiNightVat!==true&&liveVat.completed){delete state.activeVatMix[a.farm]}
+ }
  state.activeProgram=null;editingDraftShiftIndex=-1;$("farm").disabled=false;sortPlans();save();$("planViewDate").value=date;resetNewForm();renderProgramBanner();renderPlan();showPage("tonight");alert(`${a.name} saved to Tonight's Program with ${jobs.length} jobs.`)
 }
 function prepareNextShiftForm(){
@@ -407,20 +423,14 @@ function prepareNextShiftForm(){
  }
 
  const activeVat=preparedVatForFarm(a.farm),coverage=preparedVatCoverage();
+ // Keep the physical vat live until the night program is actually saved. Draft
+ // allocation alone must not close it, because the user may still edit/cancel.
  const vatStillActive=!!(activeVat&&coverage.missing.length);
  const vatJustFinished=!!(activeVat&&!coverage.missing.length);
- // Once every prepared-vat outlet has been allocated, close the vat as a live
- // source immediately. Keep its record only so final-save validation and the
- // optional final rinse can still use the completed vat details.
- if(vatJustFinished){
-   const stored=storedPreparedVatForFarm(a.farm);
-   if(stored)stored.completed=true;
-   save();
- }
 
  resetNewForm();$("farm").value=a.farm;renderOutlets();$("pumpSystem").value=GROUP[a.farm]||"";$("nightDate").value=a.nightDate;$("programName").value=a.name;
 
- // Same job type follows the previous job, except a completed one-session vat
+ // Same job type follows the previous job, except a completed prepared vat
  // is closed and must not be silently carried into Job 3+.
  $("shiftMode").value=vatStillActive?"fertigation":(last&&last.phaseMode==="fertigation"?"fertigation":"water");
  if($("vatRequired"))$("vatRequired").value=vatStillActive?"yes":"no";
@@ -523,7 +533,7 @@ function renderInlineVatMix(){
 function inlineVatSelectedOutlets(){return [...document.querySelectorAll("#mixOutlets input:checked")].map(x=>x.value)}
 function bagMixInfo(product,totalKg){const bagSize=Math.max(0,Number(productMetaFor(product).bagSize)||0),bags=bagSize>0&&totalKg>0?Math.ceil(totalKg/bagSize):0,actualKg=bags>0?bags*bagSize:totalKg;return{bagSize,bags,actualKg,roundingKg:Math.max(0,actualKg-totalKg)}}
 function inlineVatData(){const farm=$("farm").value,outs=inlineVatSelectedOutlets(),product=$("mixProduct")?.value||"",unit=productMetaFor(product).unit,rate=Math.max(0,Number($("mixRate").value)||0),volume=Math.max(0,Number($("mixVolume").value)||0),totalArea=outs.reduce((s,o)=>s+(Number(FARMS[farm]?.[o])||0),0),totalAmount=totalArea*rate,concentration=volume>0?totalAmount/volume:0,current=selected().filter(o=>outs.includes(o)),currentArea=current.reduce((s,o)=>s+(Number(FARMS[farm]?.[o])||0),0),currentAmount=currentArea*rate,currentSolution=totalArea>0?volume*(currentArea/totalArea):0;return{farm,outs,product,unit,rate,volume,totalArea,totalAmount,totalKg:totalAmount,concentration,current,currentArea,currentAmount,currentKg:currentAmount,currentSolution}}
-function renderInlineVatSummary(){const b=$("mixSummary");if(!b)return;const d=inlineVatData(),unit=d.unit==="L/ha"?"L":"kg",rateLabel=$("mixRateLabel");if(rateLabel)rateLabel.textContent=`Rate (${d.unit})`;if(!d.outs.length){b.innerHTML='<div class="muted">Select the outlets that will receive fertilizer from this vat.</div>';return}const mix=d.unit==="kg/ha"?bagMixInfo($("mixProduct").value,d.totalAmount):{bagSize:0,bags:0,actualKg:d.totalAmount,roundingKg:0},alloc=d.outs.map(o=>{const ha=Number(FARMS[d.farm]?.[o])||0;return `${esc(o)}: ${(ha*d.rate).toFixed(1)} ${unit} · ${(d.totalArea>0?d.volume*ha/d.totalArea:0).toFixed(1)} L prepared solution`}).join("<br>");b.innerHTML=`<div class="vatCalcTop"><div class="vatMetric"><span>Selected area</span><strong>${d.totalArea.toFixed(2)} ha</strong></div><div class="vatMetric"><span>Calculated requirement</span><strong>${d.totalAmount.toFixed(1)} ${unit}</strong></div>${mix.bagSize>0?`<div class="vatMetric"><span>Whole bags to mix</span><strong>${mix.bags} × ${mix.bagSize.toLocaleString("en-AU",{maximumFractionDigits:1})} kg = ${mix.actualKg.toLocaleString("en-AU",{maximumFractionDigits:1})} kg</strong></div>`:""}<div class="vatMetric"><span>Prepared vat</span><strong>${d.volume.toFixed(0)} L</strong></div><div class="vatMetric"><span>Concentration</span><strong>${d.concentration.toFixed(4)} ${unit}/L</strong></div></div><div class="vatAllocation" style="margin-top:8px">${alloc}</div><div class="note blue" style="margin-top:8px"><strong>Whole vat plan:</strong> ${d.totalAmount.toFixed(1)} ${unit} is allocated across the selected outlets by hectares.${mix.bagSize>0?` Physically mix <strong>${mix.actualKg.toFixed(1)} kg</strong> (${mix.bags} whole ${mix.bagSize.toFixed(1)} kg bags; bag rounding +${mix.roundingKg.toFixed(1)} kg).`:""} Planned prepared-solution balance after all selected outlets: <strong>0 L</strong>. Float-switch rinse water is not included.</div>`}
+function renderInlineVatSummary(){const b=$("mixSummary");if(!b)return;const d=inlineVatData(),unit=d.unit==="L/ha"?"L":"kg",rateLabel=$("mixRateLabel"),multi=$("mixVatUse")?.value==="multi",count=$("mixOutletCount"),label=$("mixOutletLabel"),help=$("mixOutletHelp");if(rateLabel)rateLabel.textContent=`Rate (${d.unit})`;if(label)label.textContent=multi?"Choose outlets for this multi-night vat":"Outlets this vat is prepared for tonight";if(help)help.textContent=multi?"Select every outlet this vat is being mixed for. They can be fertigated over multiple nights until the vat is complete.":"Select the outlets this vat will fertigate in tonight’s program.";if(count){count.textContent=`${d.outs.length} outlet${d.outs.length===1?"":"s"} selected · ${d.totalArea.toFixed(2)} ha`;count.classList.toggle("hasSelection",d.outs.length>0)};if(!d.outs.length){b.innerHTML=`<div class="muted">${multi?"Choose the outlets this multi-night vat is being prepared for.":"Select the outlets that will receive fertilizer from this vat tonight."}</div>`;return}const mix=d.unit==="kg/ha"?bagMixInfo($("mixProduct").value,d.totalAmount):{bagSize:0,bags:0,actualKg:d.totalAmount,roundingKg:0},alloc=d.outs.map(o=>{const ha=Number(FARMS[d.farm]?.[o])||0;return `${esc(o)}: ${(ha*d.rate).toFixed(1)} ${unit} · ${(d.totalArea>0?d.volume*ha/d.totalArea:0).toFixed(1)} L prepared solution`}).join("<br>");b.innerHTML=`<div class="vatCalcTop"><div class="vatMetric"><span>Selected area</span><strong>${d.totalArea.toFixed(2)} ha</strong></div><div class="vatMetric"><span>Calculated requirement</span><strong>${d.totalAmount.toFixed(1)} ${unit}</strong></div>${mix.bagSize>0?`<div class="vatMetric"><span>Whole bags to mix</span><strong>${mix.bags} × ${mix.bagSize.toLocaleString("en-AU",{maximumFractionDigits:1})} kg = ${mix.actualKg.toLocaleString("en-AU",{maximumFractionDigits:1})} kg</strong></div>`:""}<div class="vatMetric"><span>Prepared vat</span><strong>${d.volume.toFixed(0)} L</strong></div><div class="vatMetric"><span>Concentration</span><strong>${d.concentration.toFixed(4)} ${unit}/L</strong></div></div><div class="vatAllocation" style="margin-top:8px">${alloc}</div><div class="note blue" style="margin-top:8px"><strong>Whole vat plan:</strong> ${d.totalAmount.toFixed(1)} ${unit} is allocated across the selected outlets by hectares.${mix.bagSize>0?` Physically mix <strong>${mix.actualKg.toFixed(1)} kg</strong> (${mix.bags} whole ${mix.bagSize.toFixed(1)} kg bags; bag rounding +${mix.roundingKg.toFixed(1)} kg).`:""} Planned prepared-solution balance after all selected outlets: <strong>0 L</strong>. Float-switch rinse water is not included.</div>`}
 function applyInlineVatToShift(){
  const d=inlineVatData(),product=$("mixProduct").value,batch=$("mixBatchName").value.trim(),idx=Number($("mixInjector").value);
  if(!product||!d.outs.length||!(d.rate>0)||!(d.volume>0)){alert("Choose the mixed product, fertilizer outlets, target rate and vat volume first.");return}

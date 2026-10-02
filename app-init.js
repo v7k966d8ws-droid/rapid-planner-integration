@@ -56,3 +56,5 @@ $("planViewDate").value=today();$("nightDate").value=today();$("date").value=tod
  duration.addEventListener('input',syncPicker);
  syncPicker();
 })();
+
+const vatUse=$("mixVatUse");if(vatUse)vatUse.addEventListener("change",()=>{const h=$("mixVatUseHelp");if(h)h.textContent=vatUse.value==="multi"?"Carries forward across Night Programs until all prepared outlets are fertigated.":"Default: this vat must be completed in tonight's Night Program."});

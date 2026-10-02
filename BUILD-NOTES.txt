@@ -6,3 +6,12 @@ UI-only change:
 - Reduced job-card padding, header spacing, injection table row height, typography and action-button size.
 - Water-only jobs remain especially compact because they have no injection table.
 - No changes to Rapid Planner calculations, shift logic, save integration, sequencing, history logic or injector calculations.
+
+MULTI-NIGHT VAT TEST — 2026-10-01
+- Prepared vats now persist after a Night Program is saved.
+- A night may save only part of a prepared vat; remaining outlets/volume carry to the next night.
+- Previously fertigated outlets are disabled as Already allocated on following nights.
+- Remaining litres include usage committed on earlier nights plus current draft jobs.
+- Final vat rinse is added only when the current night contains the last remaining outlet(s).
+- Cancelling/starting a Night Program no longer deletes the physical prepared vat.
+- Existing double-save replacement logic retained unchanged.
