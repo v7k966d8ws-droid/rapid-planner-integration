@@ -1,0 +1,5 @@
+DIARY PLAN TEST 3
+- Fixes Diary not seeing saved Night Programs.
+- Root cause: diary.js checked window.state, but the planner state is declared with let and is not a window property.
+- Diary now reads the same in-page state.plans and state.records used by Tonight's Program and History.
+- Existing irrigation, fertigation, vat, preflow and save logic unchanged.

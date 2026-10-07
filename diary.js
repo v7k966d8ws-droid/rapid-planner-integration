@@ -14,8 +14,8 @@ function productText(r){
  if(!xs.length)return 'Fertigation';
  return xs.map(x=>{const unit=x.unit==='kg/ha'?'kg':'L';const q=Number(x.qty)||0;return `${x.name} — ${q.toLocaleString('en-AU',{maximumFractionDigits:1})} ${unit}`}).join('   ·   ')
 }
-function planned(){return (window.state&&Array.isArray(state.plans)?state.plans:[]).map(r=>({...r,_diaryStatus:'Planned'}))}
-function completed(){return (window.state&&Array.isArray(state.records)?state.records:[]).map(r=>({...r,_diaryStatus:'Completed'}))}
+function planned(){return (typeof state!=='undefined'&&Array.isArray(state.plans)?state.plans:[]).map(r=>({...r,_diaryStatus:'Planned'}))}
+function completed(){return (typeof state!=='undefined'&&Array.isArray(state.records)?state.records:[]).map(r=>({...r,_diaryStatus:'Completed'}))}
 function allDiaryRecords(){return planned().concat(completed())}
 function weekRecords(start){const end=addDays(start,7);return allDiaryRecords().filter(r=>{const d=localDate(jobDate(r));return d>=start&&d<end}).sort((a,b)=>{const da=jobDate(a).localeCompare(jobDate(b));if(da)return da;return String(a.startTime||'').localeCompare(String(b.startTime||''))})}
 function entryHtml(r){const outs=(r.outlets||[]).join(', '),status=r._diaryStatus||'Planned',cls=status==='Completed'?'completed':'planned';return `<div class="diaryEntry"><div class="diaryFarm">${r.farm||''}${outs?` — ${outs}`:''}<span class="diaryStatus ${cls}">${status==='Completed'?'✓ Completed':'Planned'}</span></div><div class="diaryHours">${jobHours(r)}</div><div class="diaryProducts">${productText(r)}</div></div>`}
