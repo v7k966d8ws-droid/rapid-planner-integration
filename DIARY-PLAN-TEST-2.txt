@@ -1,0 +1,8 @@
+DIARY PLAN TEST 2
+- Diary now reads saved future Night Programs (state.plans), not only completed history.
+- Multiple future dates appear in the Monday-Sunday diary according to Night plan date.
+- Planned jobs are labelled Planned.
+- Completed history is also shown and labelled Completed.
+- Empty days say No irrigation planned.
+- Existing irrigation, fertigation, vat, preflow and save logic unchanged.
+- Navigation widened to six columns on iPad so Setup stays on the same row.
