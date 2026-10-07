@@ -1,0 +1,8 @@
+DIARY VIEW TEST 1
+- Based on Multi-night Vat Test 5 / cumulative preflow fix.
+- Existing planner calculations and save logic are unchanged.
+- Adds Diary View link to Quick Runtime Planner.
+- diary.html reads saved Tonight's Program data from the existing localStorage state.
+- Weekly Monday-Sunday view grouped by day.
+- Shows Farm + outlets, irrigation runtime, Water only OR saved fertilizer product quantities.
+- Includes Copy diary and Print / PDF.
