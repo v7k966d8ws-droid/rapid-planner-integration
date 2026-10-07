@@ -1,0 +1,16 @@
+(function(){
+function el(id){return document.getElementById(id)}
+function isoDate(d){return d.toISOString().slice(0,10)}
+function localDate(s){const a=String(s||'').split('-').map(Number);return a.length===3?new Date(a[0],a[1]-1,a[2]):new Date()}
+function mondayOf(s){const d=localDate(s);const day=d.getDay()||7;d.setDate(d.getDate()-day+1);d.setHours(0,0,0,0);return d}
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+function fmtDate(d){return d.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'})}
+function fmtDay(d){return d.toLocaleDateString('en-AU',{weekday:'long'})}
+function productText(r){if(r.irrigationOnly)return 'Water Only';const xs=(r.injectors||[]).filter(x=>x&&x.type==='product'&&x.name);if(!xs.length)return 'Fertigation';return xs.map(x=>{const unit=x.unit==='kg/ha'?'kg':'L';const q=Number(x.qty)||0;return `${x.name} — ${q.toLocaleString('en-AU',{maximumFractionDigits:1})} ${unit}`}).join('   ·   ')}
+function records(){return (window.state&&Array.isArray(state.records)?state.records:[]).slice()}
+function weekRecords(start){const end=addDays(start,7);return records().filter(r=>{const d=localDate(r.date||r.nightDate);return d>=start&&d<end}).sort((a,b)=>String(a.startTime||'').localeCompare(String(b.startTime||'')))}
+function renderDiary(){const host=el('diaryWeek'),picker=el('diaryDate');if(!host||!picker)return;if(!picker.value)picker.value=isoDate(new Date());const start=mondayOf(picker.value),rs=weekRecords(start);let html='';for(let i=0;i<7;i++){const d=addDays(start,i),key=isoDate(d),day=rs.filter(r=>(r.date||r.nightDate)===key);html+=`<div class="diaryDay"><div class="diaryDayTitle"><strong>${fmtDay(d)}</strong><span>${fmtDate(d)}</span></div><div class="diaryEntries">`;if(!day.length)html+='<div class="diaryEmpty">No completed irrigation recorded.</div>';else day.forEach(r=>{const outs=(r.outlets||[]).join(', '),hours=Number(r.hours)||0;html+=`<div class="diaryEntry"><div class="diaryFarm">${r.farm||''} ${outs?`— ${outs}`:''}</div><div class="diaryHours">${hours?hours.toLocaleString('en-AU',{maximumFractionDigits:2})+' hrs':''}</div><div class="diaryProducts">${productText(r)}</div></div>`});html+='</div></div>'}host.innerHTML=html}
+function diaryText(){const start=mondayOf(el('diaryDate').value),rs=weekRecords(start),lines=[];for(let i=0;i<7;i++){const d=addDays(start,i),key=isoDate(d),day=rs.filter(r=>(r.date||r.nightDate)===key);lines.push(`${fmtDay(d)} ${fmtDate(d)}`);day.forEach(r=>lines.push(`${r.farm} ${(r.outlets||[]).join(', ')}   ${Number(r.hours)||0} hrs   ${productText(r)}`));if(!day.length)lines.push('—');lines.push('')}return lines.join('\n')}
+window.renderDiary=renderDiary;
+document.addEventListener('DOMContentLoaded',()=>{const picker=el('diaryDate');if(!picker)return;picker.value=isoDate(new Date());picker.addEventListener('change',renderDiary);el('diaryPrev').addEventListener('click',()=>{picker.value=isoDate(addDays(mondayOf(picker.value),-7));renderDiary()});el('diaryNext').addEventListener('click',()=>{picker.value=isoDate(addDays(mondayOf(picker.value),7));renderDiary()});el('copyDiary').addEventListener('click',async()=>{const t=diaryText();try{await navigator.clipboard.writeText(t);alert('Diary copied.')}catch(e){prompt('Copy diary:',t)}});el('printDiary').addEventListener('click',()=>window.print())});
+})();

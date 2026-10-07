@@ -21,7 +21,7 @@
 <body>
 <div class="app">
 <section class="hero"><div class="heroBrand"><div class="brandLogoSlot" aria-label="DD Produce branding"><span>DD Produce</span></div><div class="heroCopy"><h1>Irrigation & Fertigation Planner</h1><p>Plan irrigation and fertigation, calculate whole-minute injector runtimes and linked preflows, prepare mixed fertilizer vats, then enter the program into AquaLink.</p></div></div><div class="headerBuildBadge">Build 3.5</div><div class="status"><span id="network" class="pill on">● Online</span><span class="pill local">Plans and records save locally first</span></div></section>
-<nav class="tabs"><button class="active" data-page="dashboard">Dashboard</button><button data-page="tonight">Tonight's Program</button><button data-page="new">Plan Irrigation</button><button data-page="history">History</button><button data-page="setup">Setup</button></nav>
+<nav class="tabs"><button class="active" data-page="dashboard">Dashboard</button><button data-page="tonight">Tonight's Program</button><button data-page="new">Plan Irrigation</button><button data-page="history">History</button><button data-page="diary">Diary</button><button data-page="setup">Setup</button></nav>
 
 <section id="dashboard" class="page active"><div class="card"><h2>Irrigation Rotation</h2><div id="stats" class="stats"></div></div><div class="card"><h2>Outlet Status</h2><div class="muted" style="margin-bottom:10px">Only completed irrigations update the rotation. Planned jobs do not change last-irrigated dates.</div><div class="statusFilterBar"><div class="statusFilters" id="statusFilters"><button data-filter="all" class="active">All</button><button data-filter="due">Due</button><button data-filter="overdue">Overdue</button><button data-filter="last">Last Irrigation</button><button data-filter="none">No History</button></div><div class="farmFilter"><label for="statusFarmFilter">Farm</label><select id="statusFarmFilter"><option value="all">All Farms</option></select></div></div><div class="compactWrap"><table class="compactTable"><thead id="statusHead"><tr><th>Farm</th><th>Outlet</th><th>Ha</th><th>Last Irrigated</th><th>Next Due</th><th>Days</th><th>Status</th></tr></thead><tbody id="statusBody"></tbody></table></div></div></section>
 
@@ -98,6 +98,8 @@
   <div id="currentNightProgramList" class="currentNightProgramList"><div class="empty">No jobs added yet.</div></div>
 </div></section>
 
+<section id="diary" class="page"><div class="card diaryCard"><div class="diaryHead"><div><h2>Irrigation & Fertigation Diary</h2><div class="muted">Weekly diary generated from completed irrigation history.</div></div><div class="diaryControls"><label>Week containing <input id="diaryDate" type="date"></label><button id="diaryPrev" class="secondary">← Previous week</button><button id="diaryNext" class="secondary">Next week →</button><button id="copyDiary" class="secondary">Copy Diary</button><button id="printDiary" class="primary">Print / PDF</button></div></div><div id="diaryWeek" class="diaryWeek"></div></div></section>
+
 <section id="history" class="page"><div class="card">
 <div class="historyHeader"><div><h2>Completed Irrigation History</h2><div class="muted">Filter the records you need, then tap Details for pumps and fertigation information.</div></div></div>
 <div class="historyFilterBar">
@@ -163,6 +165,7 @@
 <script src="planning.js?v=build12"></script>
 <script src="app-ui.js?v=build12"></script>
 <script src="app-init.js?v=build12"></script>
+<script src="diary.js?v=test1"></script>
 
 <!-- UI Branding Polish — Pass 1 -->
 
