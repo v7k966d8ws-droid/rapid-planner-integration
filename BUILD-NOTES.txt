@@ -15,3 +15,9 @@ MULTI-NIGHT VAT TEST — 2026-10-01
 - Final vat rinse is added only when the current night contains the last remaining outlet(s).
 - Cancelling/starting a Night Program no longer deletes the physical prepared vat.
 - Existing double-save replacement logic retained unchanged.
+
+VAT RUNTIME ALLOCATION UPDATE (9 OCT 2026)
+- Prepared vat injection minutes apportioned by cumulative hectares across the whole vat, including multi-night outlets.
+- AquaLink rounded-minute allocations sum to rounded full-vat runtime; no independent rounding per shift.
+- Validate selected injector flow and prepared vat volume before saving.
+- Existing Diary View and other integration features retained.
